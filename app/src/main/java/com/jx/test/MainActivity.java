@@ -80,5 +80,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         transaction.commit();
-    }
+}
 }
