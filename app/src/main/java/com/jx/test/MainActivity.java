@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.jx.test.activity.BaseActivity;
 import com.jx.test.find.Fragment_find;
 import com.jx.test.mine.Fragment_mine;
 import com.jx.test.sift.Fragment_sift;
@@ -17,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.rdb_sift)
     RadioButton rdbSift;
@@ -35,16 +36,15 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentManager fm;
     FragmentTransaction transaction;
+    @Override
+    protected int getRootView() {
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
+    protected void init() {
         initView();
         rdbSift.setChecked(true);
-
     }
 
     public void initView() {
