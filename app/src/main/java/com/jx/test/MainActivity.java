@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         ftransaction.replace(R.id.frame_layout,fragment_sift);
         ftransaction.commit();
 
+
     }
 
 
