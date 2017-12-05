@@ -1,23 +1,22 @@
-package com.jx.test;
+package com.jx.test.activity;
 
-import android.os.Bundle;
+
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 
+import com.jx.test.R;
 import com.jx.test.find.Fragment_find;
 import com.jx.test.mine.Fragment_mine;
 import com.jx.test.sift.Fragment_sift;
 import com.jx.test.special.Fragment_special;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @BindView(R.id.rdb_sift)
     RadioButton rdbSift;
@@ -28,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.rdb_mine)
     RadioButton rdbMine;
 
+
     private Fragment_find fragment_find;
     private Fragment_mine fragment_mine;
     private Fragment_sift fragment_sift;
@@ -35,16 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
     FragmentManager fm;
     FragmentTransaction transaction;
+    @Override
+    protected int getRootView() {
+        return R.layout.activity_main;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
+    protected void init() {
         initView();
         rdbSift.setChecked(true);
-
     }
 
     public void initView() {
@@ -57,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ftransaction = fm1.beginTransaction();
         ftransaction.replace(R.id.frame_layout,fragment_sift);
         ftransaction.commit();
-
 
     }
 
@@ -88,5 +86,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-}
+    }
 }
