@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -26,6 +28,7 @@ public abstract class BaseActivity extends me.yokeyword.fragmentation.SupportAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(getRootView());
 
         mContext = this;
