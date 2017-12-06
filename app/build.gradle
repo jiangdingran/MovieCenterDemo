@@ -56,4 +56,5 @@ dependencies {
     compile 'com.yinglan.alphatabs:library:1.0.5'
     compile 'me.yokeyword:fragmentation:1.1.9'
     implementation files('libs/nineoldandroids-2.4.0.jar')
+    implementation files('libs/universal-image-loader-1.9.3.jar')
 }
