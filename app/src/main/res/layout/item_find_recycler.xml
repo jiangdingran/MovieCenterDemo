@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="500dp"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:background="@mipmap/card_bg_def"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/find_movie_title"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:text="加载中"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/find_movie_head"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_below="@+id/find_movie_title"
+        android:layout_centerHorizontal="true"
+        fresco:actualImageScaleType="centerCrop"
+        fresco:placeholderImage="@mipmap/sss"
+        fresco:placeholderImageScaleType="fitCenter"
+        fresco:roundingBorderWidth="5dp" />
+
+    <TextView
+        android:layout_below="@+id/find_movie_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/find_movie_content"
+        android:textSize="18sp"
+        android:textColor="#9999"
+        android:text="加载中"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        />
+</RelativeLayout>
