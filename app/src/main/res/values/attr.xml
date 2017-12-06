@@ -5,4 +5,9 @@
     <declare-styleable name="QQSliddingMenu">
         <attr name="rigthtPadding"/>
     </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="radius" format="reference|dimension" />
+    </declare-styleable>
+
 </resources>
