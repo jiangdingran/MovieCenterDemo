@@ -7,6 +7,16 @@
         android:layout_width="match_parent"
         android:layout_height="170dp">
     </com.youth.banner.Banner>
+    <EditText
+        android:id="@+id/edit_sou"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:hint="一念天堂"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#70666666"
+        android:paddingLeft="50dp"
+        />
     <ImageView
         android:id="@+id/shuxian"
         android:layout_width="4dp"
