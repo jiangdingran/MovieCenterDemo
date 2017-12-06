@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
 
     <include layout="@layout/title_bar" />
 
     <ImageView
+        android:layout_below="@+id/title_bar_layout"
         android:id="@+id/my_bg_colorful"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -23,14 +21,17 @@
 
     <LinearLayout
         android:id="@+id/content_mine"
-        android:background="#000"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/my_bg_colorful"
         android:orientation="vertical">
+
         <LinearLayout
-            android:layout_margin="10dp"
+            android:id="@+id/historymore"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+           android:layout_margin="15dp">
+
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
@@ -40,15 +41,108 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:gravity="center_vertical"
-                android:text="历史" />
+                android:text="历史"
+                android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                app:srcCompat="@mipmap/right" />
+        </LinearLayout>
+        <include layout="@layout/lines_view"/>
+        <LinearLayout
+            android:id="@+id/history"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/historyOne"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/historyOne_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/historyTwo"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/historyTwo_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/historyThree"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_marginRight="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/historyThree_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"/>
+                </LinearLayout>
+            </LinearLayout>
+           <include layout="@layout/lines_view"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/loadmore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:layout_margin="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_action_download" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="缓存"
+                android:textSize="20sp" />
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -58,38 +152,74 @@
         <include layout="@layout/lines_view"/>
 
         <LinearLayout
-            android:id="@+id/history"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_gravity="center"
+            android:id="@+id/save"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/historyOne"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="10dp"
-                    />
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/historyTwo"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginRight="10dp"
-                    />
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/historyThree"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    />
-            </LinearLayout>
-           <include layout="@layout/lines_view"/>
+            android:layout_height="wrap_content"
+           android:layout_margin="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_action_heart" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="收藏"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                app:srcCompat="@mipmap/right" />
         </LinearLayout>
+        <include layout="@layout/lines_view"/>
+        <LinearLayout
+            android:id="@+id/themmore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+           android:layout_margin="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_action_tshirt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="主题"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                app:srcCompat="@mipmap/right" />
+        </LinearLayout>
+        <include layout="@layout/lines_view"/>
 
     </LinearLayout>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/mine_set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/content_mine"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        app:srcCompat="@mipmap/my_set" />
+
+</RelativeLayout>
