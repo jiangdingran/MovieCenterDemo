@@ -50,7 +50,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyItem> {
         ImageLoader instance = ImageLoader.getInstance();
         instance.displayImage(clist.get(position).getChildList().get(0).getPic(),holder.img);
         holder.tv.setText(clist.get(position).getChildList().get(0).getTitle());
-        /*if (mOnItemClickLitener != null) {
+        if (mOnItemClickLitener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,7 +58,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyItem> {
                     mOnItemClickLitener.onItemClick(holder.itemView, pos);
                 }
             });
-        }*/
+        }
     }
 
     @Override

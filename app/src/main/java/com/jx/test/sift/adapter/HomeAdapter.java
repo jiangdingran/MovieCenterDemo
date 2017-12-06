@@ -6,11 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.jx.test.R;
+import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.util.GlideImageLoader;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,24 +60,24 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
             ((ViewHondlerA)holder).myBanner.setImageLoader(new GlideImageLoader());
             ((ViewHondlerA)holder).myBanner.setImages(alist);
             ((ViewHondlerA)holder).myBanner.start();
-            /*((ViewHondlerA)holder).myBanner.setOnBannerListener(new OnBannerListener() {
+            ((ViewHondlerA)holder).myBanner.setOnBannerListener(new OnBannerListener() {
                 @Override
                 public void OnBannerClick(int position) {
                     String dataId = mlist.get(0).getChildList().get(position).getDataId();
                     EventBus.getDefault().postSticky(new MyDataId(dataId));
-                    mContext.startActivity(new Intent(mContext, ShiPin.class));
+                    Toast.makeText(mContext, "点击了添加跳转页面", Toast.LENGTH_SHORT).show();
                 }
-            });*/
+            });
         }else if(holder instanceof ViewHondlerB){
             ((ViewHondlerB)holder).recyview.setLayoutManager(new LinearLayoutManager(mContext));
             ItemAdapter itemAdapter = new ItemAdapter(mlist, mContext);
             ((ViewHondlerB)holder).recyview.setAdapter(itemAdapter);
-            /*itemAdapter.setOnItemClickLitener(new ItemAdapter.OnItemClickLitener() {
+            itemAdapter.setOnItemClickLitener(new ItemAdapter.OnItemClickLitener() {
                 @Override
                 public void onItemClick(View view, int position) {
                     Toast.makeText(mContext, "请点击轮播图，谢谢配合！", Toast.LENGTH_SHORT).show();
                 }
-            });*/
+            });
         }
     }
     @Override
