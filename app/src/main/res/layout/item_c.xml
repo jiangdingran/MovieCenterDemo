@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <TextView
+        android:id="@+id/dy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="导演："
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        />
+    <TextView
+        android:id="@+id/zy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="zhu："
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        />
+    <cn.carbs.android.expandabletextview.library.ExpandableTextView
+        android:id="@+id/etv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="32dp"
+        android:background="#22999999"
+        android:padding="12dp"
+        android:text="sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssdddddddddddddddddddddddddddddddddd"
+        android:textSize="12dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        />
+</LinearLayout>

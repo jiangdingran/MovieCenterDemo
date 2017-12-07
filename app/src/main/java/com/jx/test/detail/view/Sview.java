@@ -1,4 +1,4 @@
-package com.jx.test.sift.view;
+package com.jx.test.detail.view;
 
 
 import com.jx.test.sift.bean.MyShiPinBean;
