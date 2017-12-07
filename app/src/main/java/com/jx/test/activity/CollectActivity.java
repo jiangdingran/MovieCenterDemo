@@ -8,7 +8,6 @@ public class CollectActivity extends BaseActivity {
     protected int getRootView() {
         return R.layout.activity_collect;
     }
-
     @Override
     protected void init() {
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.jx.test.search.SearchActivity">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorAccent"
+    >
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:drawableLeft="@mipmap/search"
+        android:hint="请输入你喜欢的电影"
+        android:background="#e44"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_marginRight="15dp"
+        android:text="取消"/>
+</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
