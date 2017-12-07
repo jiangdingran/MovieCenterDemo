@@ -11,12 +11,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CollectActivity extends BaseActivity {
+public class SaveActivity extends BaseActivity {
 
     @BindView(R.id.goback)
     ImageView goback;
-    @BindView(R.id.gobackLayout)
-    LinearLayout gobackLayout;
     @BindView(R.id.title_bar_name)
     TextView titleBarName;
     @BindView(R.id.settv)
@@ -26,14 +24,15 @@ public class CollectActivity extends BaseActivity {
 
     @Override
     protected int getRootView() {
-        return R.layout.activity_collect;
+        return R.layout.activity_save;
     }
 
     @Override
     protected void init() {
-        titleBarName.setText("收藏");
 
+        titleBarName.setText("收藏");
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

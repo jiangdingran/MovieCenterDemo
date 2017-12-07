@@ -1,9 +1,9 @@
 package com.jx.test.mine;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +17,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.mummyding.colorpickerdialog.ColorPickerDialog;
 import com.github.mummyding.colorpickerdialog.OnColorChangedListener;
 import com.jx.test.R;
+import com.jx.test.activity.SaveActivity;
+import com.jx.test.activity.SetActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,8 +35,7 @@ public class Fragment_mine extends Fragment {
     View view;
     @BindView(R.id.title_bar_name)
     TextView titleBarName;
-    @BindView(R.id.title_bar_layout)
-    ConstraintLayout titleBarLayout;
+
     @BindView(R.id.my_bg_colorful)
     ImageView myBgColorful;
     @BindView(R.id.imageView2)
@@ -68,12 +69,22 @@ public class Fragment_mine extends Fragment {
     @BindView(R.id.mine_set)
     ImageView mineSet;
     Unbinder unbinder;
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.settv)
+    TextView settv;
+    @BindView(R.id.title_bar_layout)
+    LinearLayout titleBarLayout;
+    @BindView(R.id.gobackLayout)
+    LinearLayout gobackLayout;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, view);
+        gobackLayout.setVisibility(View.GONE);
+        settv.setVisibility(View.GONE);
         return view;
     }
 
@@ -91,26 +102,29 @@ public class Fragment_mine extends Fragment {
             case R.id.loadmore:
                 break;
             case R.id.save:
+                startActivity(new Intent(getContext(), SaveActivity.class));
                 break;
             case R.id.themmore:
-                int [] colors = new int[]{Color.YELLOW,Color.BLACK,Color.BLUE,Color.GRAY,
-                        Color.GREEN,Color.CYAN,Color.RED,Color.DKGRAY, Color.LTGRAY,Color.MAGENTA,
-                        Color.rgb(100,22,33),Color.rgb(82,182,2), Color.rgb(122,32,12),Color.rgb(82,12,2),
-                        Color.rgb(89,23,200),Color.rgb(13,222,23)};
-                ColorPickerDialog dialog =
-                        // Constructor,the first argv is Context,second one is the colors you want to add
-                        new ColorPickerDialog(getActivity(),colors)
-                                .setOnColorChangedListener(new OnColorChangedListener() {
-                                    @Override
-                                    public void onColorChanged(int newColor) {
-                                        // do something here
-                                        Toast.makeText(getActivity(),"Color "+newColor,Toast.LENGTH_SHORT).show();
-                                        titleBarLayout.setBackgroundColor(newColor);
-                                    }})
-                                .build()
-                                .show();
-                break;
+                int[] colors = new int[]{Color.YELLOW, Color.BLACK, Color.BLUE, Color.GRAY,
+                    Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
+                    Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
+                    Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
+            ColorPickerDialog dialog =
+                    // Constructor,the first argv is Context,second one is the colors you want to add
+                    new ColorPickerDialog(getActivity(), colors)
+                            .setOnColorChangedListener(new OnColorChangedListener() {
+                                @Override
+                                public void onColorChanged(int newColor) {
+                                    // do something here
+                                    Toast.makeText(getActivity(), "Color " + newColor, Toast.LENGTH_SHORT).show();
+                                    titleBarLayout.setBackgroundColor(newColor);
+                                }
+                            })
+                            .build()
+                            .show();
+            break;
             case R.id.mine_set:
+                startActivity(new Intent(getContext(), SetActivity.class));
                 break;
         }
     }

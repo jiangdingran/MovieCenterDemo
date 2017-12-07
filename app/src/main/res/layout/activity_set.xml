@@ -8,27 +8,7 @@
     android:background="@mipmap/bg_colorful"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:background="#f0fa6210"
-        android:gravity="center">
-        <ImageView
-            android:id="@+id/img_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/back"
-            android:layout_weight="1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="设置"
-            style="@style/text"
-            android:textStyle="bold"
-            android:layout_weight="10"
-            android:gravity="center"/>
-    </LinearLayout>
+    <include layout="@layout/title_bar"/>
 
     <LinearLayout
         android:layout_marginTop="20dp"

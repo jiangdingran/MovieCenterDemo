@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jx.test.activity.CollectActivity"
-    android:background="@mipmap/bg_colorful">
+    android:background="@mipmap/bg_colorful"
+    tools:context="com.jx.test.activity.SaveActivity">
 
-    <include layout="@layout/title_bar"/>
+        <include layout="@layout/title_bar" />
 
 </android.support.constraint.ConstraintLayout>
