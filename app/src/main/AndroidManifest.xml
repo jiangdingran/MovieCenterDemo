@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jx.test">
 
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,6 +14,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+
 
     <application
         android:name=".sift.API.MyApp"
@@ -33,6 +35,9 @@
         <activity android:name=".activity.CollectActivity" />
         <activity android:name=".activity.WelfareActivity" />
         <activity android:name=".activity.SetActivity" />
+
+        <activity android:name=".detail.ShiPActivity"></activity>
+
         <activity android:name=".activity.SaveActivity"></activity>
         <activity
             android:name="com.umeng.qq.tencent.AuthActivity"
@@ -56,6 +61,7 @@
             android:name="UMENG_APPKEY"
             android:value="5a28de35f43e482e15000055">
         </meta-data>
+
     </application>
 
 </manifest>

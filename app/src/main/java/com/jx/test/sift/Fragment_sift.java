@@ -55,15 +55,18 @@ public class Fragment_sift extends Fragment implements Iview,SwipeRefreshLayout.
             @Override
             public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
                 if (y <= 0) {
+                    line.setText("精选");
                     line.setBackgroundColor(Color.argb((int) 0, 227, 29, 26));//AGB由相关工具获得，或者美工提供
                     line.setTextColor(Color.argb(0, 255, 255, 255));
                 } else if (y > 0 && y <= imageHeight) {
                     float scale = (float) y / imageHeight;
                     float alpha = (255 * scale);
                     // 只是layout背景透明
+                    line.setText("精选");
                     line.setBackgroundColor(Color.argb((int) alpha, 227, 29, 26));
                     line.setTextColor(Color.argb((int) alpha, 255, 255, 255));
                 } else {
+                    line.setText("精选");
                     line.setBackgroundColor(Color.argb((int) 255, 227, 29, 26));
                     line.setTextColor(Color.argb((int) 225, 255, 255, 255));
                 }
