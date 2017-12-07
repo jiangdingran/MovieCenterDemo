@@ -1,5 +1,6 @@
 package com.jx.test.mine;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.github.mummyding.colorpickerdialog.ColorPickerDialog;
+import com.github.mummyding.colorpickerdialog.OnColorChangedListener;
 import com.jx.test.R;
 
 import butterknife.BindView;
@@ -89,6 +93,22 @@ public class Fragment_mine extends Fragment {
             case R.id.save:
                 break;
             case R.id.themmore:
+                int [] colors = new int[]{Color.YELLOW,Color.BLACK,Color.BLUE,Color.GRAY,
+                        Color.GREEN,Color.CYAN,Color.RED,Color.DKGRAY, Color.LTGRAY,Color.MAGENTA,
+                        Color.rgb(100,22,33),Color.rgb(82,182,2), Color.rgb(122,32,12),Color.rgb(82,12,2),
+                        Color.rgb(89,23,200),Color.rgb(13,222,23)};
+                ColorPickerDialog dialog =
+                        // Constructor,the first argv is Context,second one is the colors you want to add
+                        new ColorPickerDialog(getActivity(),colors)
+                                .setOnColorChangedListener(new OnColorChangedListener() {
+                                    @Override
+                                    public void onColorChanged(int newColor) {
+                                        // do something here
+                                        Toast.makeText(getActivity(),"Color "+newColor,Toast.LENGTH_SHORT).show();
+                                        titleBarLayout.setBackgroundColor(newColor);
+                                    }})
+                                .build()
+                                .show();
                 break;
             case R.id.mine_set:
                 break;

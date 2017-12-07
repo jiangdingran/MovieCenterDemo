@@ -8,6 +8,7 @@
 
     <include layout="@layout/title_bar" />
 
+
     <ImageView
         android:layout_below="@+id/title_bar_layout"
         android:id="@+id/my_bg_colorful"
