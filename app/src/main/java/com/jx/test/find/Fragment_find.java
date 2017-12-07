@@ -94,52 +94,61 @@ public class Fragment_find extends Fragment implements IView {
 
     @Override
     public void getData(ArrayList<HomeBean.RetBean.ListBean> list) {
+
         if(mlist == null){
             mlist = new ArrayList<>();
-            mlist = list;
 
-            adapter = new MyRecyclerAdapter(mlist,getActivity());
 
-            recyclerview.setItemAnimator(new DefaultItemAnimator());
-            recyclerview.setAdapter(adapter);
-            CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerview.getAdapter(), list);
-            cardCallback.setOnSwipedListener(new OnSwipeListener<HomeBean.RetBean.ListBean>() {
-                @Override
-                public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
-                }
-                @Override
-                public void onSwiped(RecyclerView.ViewHolder viewHolder, HomeBean.RetBean.ListBean listBean, int direction) {
-                }
-                @Override
-                public void onSwipedClear() {
-                }
-            });
-            final ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
-            final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerview, touchHelper);
-            recyclerview.setLayoutManager(cardLayoutManager);
-            touchHelper.attachToRecyclerView(recyclerview);
+                mlist = list;
+                adapter = new MyRecyclerAdapter(mlist,getActivity());
+
+                recyclerview.setItemAnimator(new DefaultItemAnimator());
+                recyclerview.setAdapter(adapter);
+                CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerview.getAdapter(), list);
+                cardCallback.setOnSwipedListener(new OnSwipeListener<HomeBean.RetBean.ListBean>() {
+                    @Override
+                    public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
+                    }
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, HomeBean.RetBean.ListBean listBean, int direction) {
+                    }
+                    @Override
+                    public void onSwipedClear() {
+                    }
+                });
+                final ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
+                final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerview, touchHelper);
+                recyclerview.setLayoutManager(cardLayoutManager);
+                touchHelper.attachToRecyclerView(recyclerview);
+
+
         }else{
             mlist.clear();
-            mlist = list;
-            adapter = new MyRecyclerAdapter(mlist,getActivity());
-            recyclerview.setItemAnimator(new DefaultItemAnimator());
-            recyclerview.setAdapter(adapter);
-            CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerview.getAdapter(), list);
-            cardCallback.setOnSwipedListener(new OnSwipeListener<HomeBean.RetBean.ListBean>() {
-                @Override
-                public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
-                }
-                @Override
-                public void onSwiped(RecyclerView.ViewHolder viewHolder, HomeBean.RetBean.ListBean listBean, int direction) {
-                }
-                @Override
-                public void onSwipedClear() {
-                }
-            });
-            final ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
-            final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerview, touchHelper);
-            recyclerview.setLayoutManager(cardLayoutManager);
-            touchHelper.attachToRecyclerView(recyclerview);
+
+
+                mlist = list;
+                adapter = new MyRecyclerAdapter(mlist,getActivity());
+
+                recyclerview.setItemAnimator(new DefaultItemAnimator());
+                recyclerview.setAdapter(adapter);
+                CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerview.getAdapter(), list);
+                cardCallback.setOnSwipedListener(new OnSwipeListener<HomeBean.RetBean.ListBean>() {
+                    @Override
+                    public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
+                    }
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, HomeBean.RetBean.ListBean listBean, int direction) {
+                    }
+                    @Override
+                    public void onSwipedClear() {
+                    }
+                });
+                final ItemTouchHelper touchHelper = new ItemTouchHelper(cardCallback);
+                final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerview, touchHelper);
+                recyclerview.setLayoutManager(cardLayoutManager);
+                touchHelper.attachToRecyclerView(recyclerview);
+
+
         }
 
 
