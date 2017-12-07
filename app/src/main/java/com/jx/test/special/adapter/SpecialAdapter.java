@@ -55,7 +55,7 @@ public class SpecialAdapter extends RecyclerView.Adapter<SpecialAdapter.MyViewHo
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, ListActivity.class));
-                EventBus.getDefault().postSticky(new PostionBean(position));
+                EventBus.getDefault().postSticky(new PostionBean(position,list.get(position).getTitle()));
             }
         });
     }

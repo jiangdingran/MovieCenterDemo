@@ -3,9 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MovieCenterDemo.iml" filepath="$PROJECT_DIR$/MovieCenterDemo.iml" />
-
+      <module fileurl="file://E:\Github\gongch\MovieCenterDemo\MovieCenterDemo.iml" filepath="E:\Github\gongch\MovieCenterDemo\MovieCenterDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://G:\Android_project\MovieCenterDemo\app\app.iml" filepath="G:\Android_project\MovieCenterDemo\app\app.iml" />
+      <module fileurl="file://E:\Github\gongch\MovieCenterDemo\app\app.iml" filepath="E:\Github\gongch\MovieCenterDemo\app\app.iml" />
     </modules>
   </component>
 </project>
