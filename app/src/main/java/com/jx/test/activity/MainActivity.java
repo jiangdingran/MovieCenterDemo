@@ -120,16 +120,26 @@ public class MainActivity extends BaseActivity {
         FragmentManager fm1 = getSupportFragmentManager();
         FragmentTransaction ftransaction = fm1.beginTransaction();
 
-        ftransaction.show(fragment_mine);
+        ftransaction.show(fragment_sift);
         ftransaction.hide(fragment_find);
-        ftransaction.hide(fragment_sift);
+        ftransaction.hide(fragment_mine);
         ftransaction.hide(fragment_special);
         ftransaction.commit();
 
     }
 
+    public void AddFragment(){
+        FragmentManager fm1 = getSupportFragmentManager();
+        FragmentTransaction ftransaction = fm1.beginTransaction();
+        ftransaction.add(R.id.frame_layout,fragment_sift);
+        ftransaction.add(R.id.frame_layout,fragment_mine);
+        ftransaction.add(R.id.frame_layout,fragment_find);
+        ftransaction.add(R.id.frame_layout,fragment_special);
+        ftransaction.commit();
+    }
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt,R.id.menu_share})
+
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
