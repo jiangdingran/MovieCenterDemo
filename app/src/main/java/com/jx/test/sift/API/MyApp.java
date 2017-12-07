@@ -17,6 +17,7 @@ public class MyApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fresco.initialize(this);
         mInstance = this;
         Fresco.initialize(this);
         ImageLoaderConfiguration aDefault = ImageLoaderConfiguration.createDefault(getApplicationContext());

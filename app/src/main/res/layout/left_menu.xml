@@ -80,7 +80,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -93,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="分享"
                 style="@style/text"
+                android:id="@+id/share"
                 android:layout_gravity="center"/>
         </LinearLayout>
 
