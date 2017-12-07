@@ -62,6 +62,7 @@ public class UserModel implements IModel {
                         mlist = (ArrayList<HomeBean.RetBean.ListBean>) homeBean.getRet().getList();
 
                         onFinish.onFinishListen(mlist);
+
                     }
 
                     @Override
