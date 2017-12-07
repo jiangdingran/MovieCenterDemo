@@ -3,6 +3,7 @@ package com.jx.test.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
@@ -13,9 +14,12 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mummyding.colorpickerdialog.ColorPickerDialog;
+import com.github.mummyding.colorpickerdialog.OnColorChangedListener;
 import com.jx.test.R;
 import com.jx.test.find.Fragment_find;
 import com.jx.test.mine.Fragment_mine;
@@ -74,6 +78,8 @@ public class MainActivity extends BaseActivity {
     ResideLayout resideLayout;
 
     UMAuthListener umAuthListener;
+    @BindView(R.id.chbg)
+    RelativeLayout chbg;
     private Fragment_find fragment_find;
     private Fragment_mine fragment_mine;
     private Fragment_sift fragment_sift;
@@ -109,7 +115,7 @@ public class MainActivity extends BaseActivity {
             }
         });
         //友盟第三方监听
-         umAuthListener = new UMAuthListener() {
+        umAuthListener = new UMAuthListener() {
             @Override
             public void onStart(SHARE_MEDIA share_media) {
 
@@ -117,13 +123,13 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                System.out.println("uid========"+map.get("uid"));
-                System.out.println("name========"+map.get("name"));
-                System.out.println("iconurl========"+map.get("iconurl"));
-            //设置QQ头像
-            ImageLoader.getInstance().displayImage(map.get("iconurl"),roundImageView);
-            //设置QQ名字
-            texName.setText(map.get("name"));
+                System.out.println("uid========" + map.get("uid"));
+                System.out.println("name========" + map.get("name"));
+                System.out.println("iconurl========" + map.get("iconurl"));
+                //设置QQ头像
+                ImageLoader.getInstance().displayImage(map.get("iconurl"), roundImageView);
+                //设置QQ名字
+                texName.setText(map.get("name"));
             }
 
             @Override
@@ -162,18 +168,18 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    public void AddFragment(){
+    public void AddFragment() {
         FragmentManager fm1 = getSupportFragmentManager();
         FragmentTransaction ftransaction = fm1.beginTransaction();
-        ftransaction.add(R.id.frame_layout,fragment_sift);
-        ftransaction.add(R.id.frame_layout,fragment_mine);
-        ftransaction.add(R.id.frame_layout,fragment_find);
-        ftransaction.add(R.id.frame_layout,fragment_special);
+        ftransaction.add(R.id.frame_layout, fragment_sift);
+        ftransaction.add(R.id.frame_layout, fragment_mine);
+        ftransaction.add(R.id.frame_layout, fragment_find);
+        ftransaction.add(R.id.frame_layout, fragment_special);
         ftransaction.commit();
     }
 
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt,R.id.roundImageView})
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt, R.id.roundImageView})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
@@ -231,9 +237,26 @@ public class MainActivity extends BaseActivity {
                 builder.create().show();
                 break;
             case R.id.zt:
+                int[] colors = new int[]{Color.YELLOW, Color.BLACK, Color.BLUE, Color.GRAY,
+                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
+                        Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
+                        Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
+                ColorPickerDialog dialog =
+                        // Constructor,the first argv is Context,second one is the colors you want to add
+                        new ColorPickerDialog(MainActivity.this, colors)
+                                .setOnColorChangedListener(new OnColorChangedListener() {
+                                    @Override
+                                    public void onColorChanged(int newColor) {
+                                        // do something here
+                                        Toast.makeText(MainActivity.this, "Color " + newColor, Toast.LENGTH_SHORT).show();
+                                        chbg.setBackgroundColor(newColor);
+                                    }
+                                })
+                                .build()
+                                .show();
                 break;
             case R.id.roundImageView:
-                UMShareAPI.get(MainActivity.this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
+                UMShareAPI.get(MainActivity.this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.QQ, umAuthListener);
                 break;
         }
         transaction.commit();
