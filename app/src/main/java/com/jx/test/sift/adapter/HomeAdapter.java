@@ -7,10 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jx.test.R;
+
+import com.jx.test.search.SearchActivity;
+
 import com.jx.test.detail.ShiPActivity;
+
 import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.util.GlideImageLoader;
@@ -55,6 +60,12 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof ViewHondlerA){
+            ((ViewHondlerA) holder).searc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mContext.startActivity(new Intent(mContext, SearchActivity.class));
+                }
+            });
             alist=new ArrayList();
             for (int i=0;i<mlist.get(0).getChildList().size();i++){
                 alist.add(mlist.get(0).getChildList().get(i).getPic());
@@ -98,8 +109,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     }
     class ViewHondlerA extends RecyclerView.ViewHolder {
         Banner myBanner;
+        EditText searc;
         public ViewHondlerA(View itemView) {
             super(itemView);
+            searc=itemView.findViewById(R.id.edit_sou);
             myBanner=(Banner)itemView.findViewById(R.id.mybanner);
         }
     }

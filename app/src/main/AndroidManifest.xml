@@ -36,6 +36,9 @@
         <activity android:name=".activity.WelfareActivity" />
         <activity android:name=".activity.SetActivity" />
 
+        <activity android:name=".activity.SaveActivity" />
+        <activity android:name=".search.SearchActivity"></activity>
+
         <activity android:name=".detail.ShiPActivity"></activity>
 
         <activity android:name=".activity.SaveActivity"></activity>

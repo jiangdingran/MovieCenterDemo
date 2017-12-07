@@ -28,7 +28,6 @@ public class CollectActivity extends BaseActivity {
     protected int getRootView() {
         return R.layout.activity_collect;
     }
-
     @Override
     protected void init() {
         titleBarName.setText("收藏");
