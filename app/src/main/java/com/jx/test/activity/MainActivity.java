@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
         initView();
-        rdbSift.setChecked(true);
+        rdbMine.setChecked(true);
     }
 
     public void initView() {
@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity {
 
         FragmentManager fm1 = getSupportFragmentManager();
         FragmentTransaction ftransaction = fm1.beginTransaction();
-        ftransaction.replace(R.id.frame_layout, fragment_sift);
+        ftransaction.replace(R.id.frame_layout, fragment_mine);
         ftransaction.commit();
 
     }
