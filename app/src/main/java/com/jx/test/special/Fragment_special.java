@@ -8,14 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jx.test.R;
 import com.jx.test.special.adapter.SpecialAdapter;
 import com.jx.test.special.bean.SpecialBean;
 import com.jx.test.special.presenter.Mypresent;
 import com.jx.test.special.view.Sview;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -32,6 +31,10 @@ public class Fragment_special extends Fragment implements Sview {
     @BindView(R.id.spec)
     RecyclerView spec;
     Unbinder unbinder;
+    @BindView(R.id.title_bar_name)
+    TextView titleBarName;
+    @BindView(R.id.settv)
+    TextView settv;
     private Mypresent mypresent;
     private SpecialAdapter specialAdapter;
 
@@ -43,13 +46,15 @@ public class Fragment_special extends Fragment implements Sview {
         mypresent = new Mypresent(this);
         mypresent.setdata("homePage.do");
         unbinder = ButterKnife.bind(this, view);
+        titleBarName.setText("专题");
+        settv.setVisibility(View.INVISIBLE);
         return view;
     }
 
     @Override
     public void getsview(List<SpecialBean.RetBean.ListBean> list) {
-        spec.setLayoutManager(new GridLayoutManager(getActivity(),2));
-        specialAdapter=new SpecialAdapter(list,getActivity());
+        spec.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        specialAdapter = new SpecialAdapter(list, getActivity());
         spec.setAdapter(specialAdapter);
     }
 

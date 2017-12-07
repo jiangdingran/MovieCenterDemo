@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jx.test.R;
@@ -48,7 +50,13 @@ public class Fragment_find extends Fragment implements IView {
     ArrayList<HomeBean.RetBean.ListBean> mlist;
     MyRecyclerAdapter adapter;
 
-    int page=1;
+    int page = 1;
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.settv)
+    TextView settv;
+    @BindView(R.id.title_bar_name)
+    TextView titleBarName;
 
     @Nullable
     @Override
@@ -56,21 +64,23 @@ public class Fragment_find extends Fragment implements IView {
         view = inflater.inflate(R.layout.fragment_find, null);
         unbinder = ButterKnife.bind(this, view);
 
+        goback.setVisibility(View.INVISIBLE);
+        settv.setVisibility(View.INVISIBLE);
+        titleBarName.setText("发现");
         userPresenter = new UserPresenter(this);
 
         initData(page);
 
 
-
         return view;
     }
 
-    public void initData(int mpage){
-        HashMap<String,String> mmap = new HashMap<>();
-        mmap.put("catalogId","402834815584e463015584e539330016");
-        mmap.put("pnum",mpage+"");
+    public void initData(int mpage) {
+        HashMap<String, String> mmap = new HashMap<>();
+        mmap.put("catalogId", "402834815584e463015584e539330016");
+        mmap.put("pnum", mpage + "");
 
-        userPresenter.getUrl(HOST,mmap);
+        userPresenter.getUrl(HOST, mmap);
     }
 
     @Override
@@ -82,9 +92,9 @@ public class Fragment_find extends Fragment implements IView {
     @OnClick(R.id.btn_change)
     public void onViewClicked() {
 
-        if(page==20){
-            page=1;
-        }else{
+        if (page == 20) {
+            page = 1;
+        } else {
             page++;
         }
 
@@ -94,11 +104,13 @@ public class Fragment_find extends Fragment implements IView {
 
     @Override
     public void getData(ArrayList<HomeBean.RetBean.ListBean> list) {
-        if(mlist == null){
+
+        if (mlist == null) {
             mlist = new ArrayList<>();
-            mlist = list;
 
-            adapter = new MyRecyclerAdapter(mlist,getActivity());
+
+            mlist = list;
+            adapter = new MyRecyclerAdapter(mlist, getActivity());
 
             recyclerview.setItemAnimator(new DefaultItemAnimator());
             recyclerview.setAdapter(adapter);
@@ -107,9 +119,11 @@ public class Fragment_find extends Fragment implements IView {
                 @Override
                 public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
                 }
+
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, HomeBean.RetBean.ListBean listBean, int direction) {
                 }
+
                 @Override
                 public void onSwipedClear() {
                 }
@@ -118,10 +132,15 @@ public class Fragment_find extends Fragment implements IView {
             final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerview, touchHelper);
             recyclerview.setLayoutManager(cardLayoutManager);
             touchHelper.attachToRecyclerView(recyclerview);
-        }else{
+
+
+        } else {
             mlist.clear();
+
+
             mlist = list;
-            adapter = new MyRecyclerAdapter(mlist,getActivity());
+            adapter = new MyRecyclerAdapter(mlist, getActivity());
+
             recyclerview.setItemAnimator(new DefaultItemAnimator());
             recyclerview.setAdapter(adapter);
             CardItemTouchHelperCallback cardCallback = new CardItemTouchHelperCallback(recyclerview.getAdapter(), list);
@@ -129,9 +148,11 @@ public class Fragment_find extends Fragment implements IView {
                 @Override
                 public void onSwiping(RecyclerView.ViewHolder viewHolder, float ratio, int direction) {
                 }
+
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, HomeBean.RetBean.ListBean listBean, int direction) {
                 }
+
                 @Override
                 public void onSwipedClear() {
                 }
@@ -140,22 +161,21 @@ public class Fragment_find extends Fragment implements IView {
             final CardLayoutManager cardLayoutManager = new CardLayoutManager(recyclerview, touchHelper);
             recyclerview.setLayoutManager(cardLayoutManager);
             touchHelper.attachToRecyclerView(recyclerview);
+
+
         }
 
 
-        adapter.setOnItemClickLitener(new MyRecyclerAdapter.OnItemClickLitener()
-        {
+        adapter.setOnItemClickLitener(new MyRecyclerAdapter.OnItemClickLitener() {
 
             @Override
-            public void onItemClick(View view, int position)
-            {
-                Toast.makeText(getActivity(), position + " click"+mlist.get(position).getTitle(),
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getActivity(), position + " click" + mlist.get(position).getTitle(),
                         Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onItemLongClick(View view, int position)
-            {
+            public void onItemLongClick(View view, int position) {
                 Toast.makeText(getActivity(), position + " long click",
                         Toast.LENGTH_SHORT).show();
 

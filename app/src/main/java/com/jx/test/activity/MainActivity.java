@@ -4,6 +4,7 @@ package com.jx.test.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -103,36 +104,63 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+//        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
     public void initView() {
         fragment_find = new Fragment_find();
         fragment_mine = new Fragment_mine();
         fragment_sift = new Fragment_sift();
         fragment_special = new Fragment_special();
 
+        AddFragment();
+
         FragmentManager fm1 = getSupportFragmentManager();
         FragmentTransaction ftransaction = fm1.beginTransaction();
-        ftransaction.replace(R.id.frame_layout, fragment_sift);
+
+        ftransaction.show(fragment_mine);
+        ftransaction.hide(fragment_find);
+        ftransaction.hide(fragment_sift);
+        ftransaction.hide(fragment_special);
         ftransaction.commit();
 
     }
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.fx, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt})
+
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt,R.id.menu_share})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
 
         switch (view.getId()) {
             case R.id.rdb_sift:
-                transaction.replace(R.id.frame_layout, fragment_sift);
+                transaction.show(fragment_sift);
+                transaction.hide(fragment_mine);
+                transaction.hide(fragment_find);
+                transaction.hide(fragment_special);
                 break;
             case R.id.rdb_special:
-                transaction.replace(R.id.frame_layout, fragment_special);
+                //transaction.replace(R.id.frame_layout, fragment_special);
+                transaction.show(fragment_special);
+                transaction.hide(fragment_mine);
+                transaction.hide(fragment_sift);
+                transaction.hide(fragment_find);
                 break;
             case R.id.rdb_find:
-                transaction.replace(R.id.frame_layout, fragment_find);
+                //transaction.replace(R.id.frame_layout, fragment_find);
+                transaction.show(fragment_find);
+                transaction.hide(fragment_mine);
+                transaction.hide(fragment_sift);
+                transaction.hide(fragment_special);
                 break;
             case R.id.rdb_mine:
-                transaction.replace(R.id.frame_layout, fragment_mine);
+                //transaction.replace(R.id.frame_layout, fragment_mine);
+                transaction.show(fragment_mine);
+                transaction.hide(fragment_find);
+                transaction.hide(fragment_sift);
+                transaction.hide(fragment_special);
                 break;
             case R.id.sc:
                 startActivity(new Intent(MainActivity.this, CollectActivity.class));
