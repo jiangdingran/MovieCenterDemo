@@ -1,6 +1,8 @@
 package com.jx.test.activity;
 
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,7 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.jx.test.R;
 import com.jx.test.find.Fragment_find;
@@ -33,6 +39,28 @@ public class MainActivity extends BaseActivity {
     RadioButton rdbMine;
     @BindView(R.id.qqsm)
     QQSliddingMenu qqsm;
+    @BindView(R.id.sc)
+    LinearLayout sc;
+    @BindView(R.id.load)
+    LinearLayout load;
+    @BindView(R.id.fl)
+    LinearLayout fl;
+    @BindView(R.id.share)
+    LinearLayout share;
+    @BindView(R.id.jyfk)
+    LinearLayout jyfk;
+    @BindView(R.id.sz)
+    LinearLayout sz;
+    @BindView(R.id.gy)
+    LinearLayout gy;
+    @BindView(R.id.zt)
+    LinearLayout zt;
+    @BindView(R.id.frame_layout)
+    FrameLayout frameLayout;
+    @BindView(R.id.my_radiogroup)
+    RadioGroup myRadiogroup;
+    @BindView(R.id.btn_layout)
+    LinearLayout btnLayout;
 
 
     private Fragment_find fragment_find;
@@ -68,7 +96,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine})
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine,R.id.sc, R.id.load, R.id.fl, R.id.share, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
@@ -85,6 +113,32 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rdb_mine:
                 transaction.replace(R.id.frame_layout, fragment_mine);
+                break;
+            case R.id.sc:
+                startActivity(new Intent(MainActivity.this,CollectActivity.class));
+                break;
+            case R.id.load:
+                Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.fl:
+                startActivity(new Intent(MainActivity.this,WelfareActivity.class));
+                break;
+            case R.id.share:
+                break;
+            case R.id.jyfk:
+                break;
+            case R.id.sz:
+                startActivity(new Intent(MainActivity.this,SetActivity.class));
+                break;
+            case R.id.gy:
+                AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);//当前环境
+                builder.setIcon(R.mipmap.ic_action_users);//提示图标
+                builder.setTitle("关于我们");//提示框标题
+                builder.setMessage("点开并没有什么"+"\n"+"但请记住,我们是:景行工作室");//提示内容
+                builder.setNegativeButton("关闭",null);//关闭按钮
+                builder.create().show();
+                break;
+            case R.id.zt:
                 break;
         }
         transaction.commit();

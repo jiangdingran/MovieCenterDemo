@@ -2,6 +2,7 @@ package com.jx.test.sift.API;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
@@ -17,6 +18,7 @@ public class MyApp extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        Fresco.initialize(this);
         ImageLoaderConfiguration aDefault = ImageLoaderConfiguration.createDefault(getApplicationContext());
         ImageLoader.getInstance().init(aDefault);
 
