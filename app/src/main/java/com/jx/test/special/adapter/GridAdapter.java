@@ -4,12 +4,11 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.jx.test.R;
 import com.jx.test.special.bean.SpecialBean;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -54,11 +53,17 @@ public class GridAdapter extends BaseAdapter {
             holder= (ViewHolder) view.getTag();
         }
         holder.textView.setText(childList.get(i).getTitle());
-        ImageLoader.getInstance().displayImage(childList.get(i).getPic(),holder.imageView);
+        holder.imageView.setImageURI(childList.get(i).getPic(),holder.imageView);
+        holder.imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         return view;
     }
     class ViewHolder{
         private TextView textView;
-        private ImageView imageView;
+        private SimpleDraweeView imageView;
     }
 }
