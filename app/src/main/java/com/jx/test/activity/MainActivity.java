@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -22,7 +20,8 @@ import com.jx.test.find.Fragment_find;
 import com.jx.test.mine.Fragment_mine;
 import com.jx.test.sift.Fragment_sift;
 import com.jx.test.special.Fragment_special;
-import com.jx.test.utils.QQSliddingMenu;
+import com.jx.test.utils.ResideLayout;
+import com.jx.test.utils.XCRoundImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,15 +37,14 @@ public class MainActivity extends BaseActivity {
     RadioButton rdbFind;
     @BindView(R.id.rdb_mine)
     RadioButton rdbMine;
-    @BindView(R.id.qqsm)
-    QQSliddingMenu qqsm;
     @BindView(R.id.sc)
     LinearLayout sc;
     @BindView(R.id.load)
     LinearLayout load;
     @BindView(R.id.fl)
     LinearLayout fl;
-
+    @BindView(R.id.fx)
+    LinearLayout fx;
     @BindView(R.id.jyfk)
     LinearLayout jyfk;
     @BindView(R.id.sz)
@@ -61,15 +59,18 @@ public class MainActivity extends BaseActivity {
     RadioGroup myRadiogroup;
     @BindView(R.id.btn_layout)
     LinearLayout btnLayout;
-    @BindView(R.id.menu_share)
-    TextView menuShare;
+    @BindView(R.id.roundImageView)
+    XCRoundImageView roundImageView;
+    @BindView(R.id.tex_name)
+    TextView texName;
+    @BindView(R.id.resideLayout)
+    ResideLayout resideLayout;
 
 
     private Fragment_find fragment_find;
     private Fragment_mine fragment_mine;
     private Fragment_sift fragment_sift;
     private Fragment_special fragment_special;
-    private QQSliddingMenu qqSliddingMenu;
 
     FragmentManager fm;
     FragmentTransaction transaction;
@@ -82,7 +83,24 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
         initView();
-        rdbMine.setChecked(true);
+        rdbSift.setChecked(true);
+        //侧滑的监听
+        resideLayout.setPanelSlideListener(new ResideLayout.PanelSlideListener() {
+            @Override
+            public void onPanelSlide(View panel, float slideOffset) {
+
+            }
+
+            @Override
+            public void onPanelOpened(View panel) {
+                Toast.makeText(MainActivity.this, "打开", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onPanelClosed(View panel) {
+                Toast.makeText(MainActivity.this, "关闭", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void initView() {
@@ -93,12 +111,12 @@ public class MainActivity extends BaseActivity {
 
         FragmentManager fm1 = getSupportFragmentManager();
         FragmentTransaction ftransaction = fm1.beginTransaction();
-        ftransaction.replace(R.id.frame_layout, fragment_mine);
+        ftransaction.replace(R.id.frame_layout, fragment_sift);
         ftransaction.commit();
 
     }
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt,R.id.menu_share})
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.fx, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
@@ -125,8 +143,8 @@ public class MainActivity extends BaseActivity {
             case R.id.fl:
                 startActivity(new Intent(MainActivity.this, WelfareActivity.class));
                 break;
-//            case R.id.share:
-//                break;
+            case R.id.fx:
+                break;
             case R.id.jyfk:
                 break;
             case R.id.sz:
@@ -146,26 +164,6 @@ public class MainActivity extends BaseActivity {
         transaction.commit();
         Log.d("sss", "onViewClicked: ddd");
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void toggleMenu(View view) {
-        qqSliddingMenu.toggleMenu();
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
