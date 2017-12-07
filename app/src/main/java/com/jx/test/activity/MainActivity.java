@@ -23,6 +23,12 @@ import com.jx.test.sift.Fragment_sift;
 import com.jx.test.special.Fragment_special;
 import com.jx.test.utils.ResideLayout;
 import com.jx.test.utils.XCRoundImageView;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.socialize.UMAuthListener;
+import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.bean.SHARE_MEDIA;
+
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -67,7 +73,7 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.resideLayout)
     ResideLayout resideLayout;
 
-
+    UMAuthListener umAuthListener;
     private Fragment_find fragment_find;
     private Fragment_mine fragment_mine;
     private Fragment_sift fragment_sift;
@@ -94,14 +100,42 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPanelOpened(View panel) {
-                Toast.makeText(MainActivity.this, "打开", Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(MainActivity.this, "打开", Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
             public void onPanelClosed(View panel) {
-                Toast.makeText(MainActivity.this, "关闭", Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(MainActivity.this, "关闭", Toast.LENGTH_SHORT).show();*/
             }
         });
+        //友盟第三方监听
+         umAuthListener = new UMAuthListener() {
+            @Override
+            public void onStart(SHARE_MEDIA share_media) {
+
+            }
+
+            @Override
+            public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
+                System.out.println("uid========"+map.get("uid"));
+                System.out.println("name========"+map.get("name"));
+                System.out.println("iconurl========"+map.get("iconurl"));
+            //设置QQ头像
+            ImageLoader.getInstance().displayImage(map.get("iconurl"),roundImageView);
+            //设置QQ名字
+            texName.setText(map.get("name"));
+            }
+
+            @Override
+            public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCancel(SHARE_MEDIA share_media, int i) {
+
+            }
+        };
     }
 
     @Override
@@ -139,7 +173,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt})
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt,R.id.roundImageView})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
@@ -198,9 +232,19 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.zt:
                 break;
+            case R.id.roundImageView:
+                UMShareAPI.get(MainActivity.this).getPlatformInfo(MainActivity.this, SHARE_MEDIA.QQ,umAuthListener);
+                break;
         }
         transaction.commit();
         Log.d("sss", "onViewClicked: ddd");
+    }
+
+    //第三方登录重写onactivityresult
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

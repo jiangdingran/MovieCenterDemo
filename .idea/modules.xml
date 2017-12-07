@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MovieCenterDemo.iml" filepath="$PROJECT_DIR$/MovieCenterDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\w h l\Desktop\ccc\MovieCenterDemo\app\app.iml" filepath="C:\Users\w h l\Desktop\ccc\MovieCenterDemo\app\app.iml" />
       <module fileurl="file://E:\Github\gongch\MovieCenterDemo\app\app.iml" filepath="E:\Github\gongch\MovieCenterDemo\app\app.iml" />
     </modules>
   </component>
