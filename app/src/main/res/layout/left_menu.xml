@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="分享"
                 style="@style/text"
-                android:id="@+id/share"
+                android:id="@+id/menu_share"
                 android:layout_gravity="center"/>
         </LinearLayout>
 

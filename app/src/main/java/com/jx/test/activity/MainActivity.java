@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jx.test.R;
@@ -45,8 +46,7 @@ public class MainActivity extends BaseActivity {
     LinearLayout load;
     @BindView(R.id.fl)
     LinearLayout fl;
-    @BindView(R.id.share)
-    LinearLayout share;
+
     @BindView(R.id.jyfk)
     LinearLayout jyfk;
     @BindView(R.id.sz)
@@ -61,6 +61,8 @@ public class MainActivity extends BaseActivity {
     RadioGroup myRadiogroup;
     @BindView(R.id.btn_layout)
     LinearLayout btnLayout;
+    @BindView(R.id.menu_share)
+    TextView menuShare;
 
 
     private Fragment_find fragment_find;
@@ -96,7 +98,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine,R.id.sc, R.id.load, R.id.fl, R.id.share, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt})
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt,R.id.menu_share})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
@@ -115,27 +117,27 @@ public class MainActivity extends BaseActivity {
                 transaction.replace(R.id.frame_layout, fragment_mine);
                 break;
             case R.id.sc:
-                startActivity(new Intent(MainActivity.this,CollectActivity.class));
+                startActivity(new Intent(MainActivity.this, CollectActivity.class));
                 break;
             case R.id.load:
                 Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.fl:
-                startActivity(new Intent(MainActivity.this,WelfareActivity.class));
+                startActivity(new Intent(MainActivity.this, WelfareActivity.class));
                 break;
-            case R.id.share:
-                break;
+//            case R.id.share:
+//                break;
             case R.id.jyfk:
                 break;
             case R.id.sz:
-                startActivity(new Intent(MainActivity.this,SetActivity.class));
+                startActivity(new Intent(MainActivity.this, SetActivity.class));
                 break;
             case R.id.gy:
-                AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);//当前环境
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);//当前环境
                 builder.setIcon(R.mipmap.ic_action_users);//提示图标
                 builder.setTitle("关于我们");//提示框标题
-                builder.setMessage("点开并没有什么"+"\n"+"但请记住,我们是:景行工作室");//提示内容
-                builder.setNegativeButton("关闭",null);//关闭按钮
+                builder.setMessage("点开并没有什么" + "\n" + "但请记住,我们是:景行工作室");//提示内容
+                builder.setNegativeButton("关闭", null);//关闭按钮
                 builder.create().show();
                 break;
             case R.id.zt:
