@@ -6,9 +6,11 @@ package com.jx.test.special.bean;
 
 public class PostionBean {
     private int pos;
+    private String name;
 
-    public PostionBean(int pos) {
+    public PostionBean(int pos, String name) {
         this.pos = pos;
+        this.name = name;
     }
 
     public int getPos() {
@@ -17,5 +19,13 @@ public class PostionBean {
 
     public void setPos(int pos) {
         this.pos = pos;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
