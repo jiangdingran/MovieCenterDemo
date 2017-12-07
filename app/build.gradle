@@ -59,4 +59,6 @@ dependencies {
     implementation files('libs/universal-image-loader-1.9.3.jar')
     //主题
     compile 'com.mummyding.view:colorpickerdialog:1.0.0'
+    implementation files('libs/umeng_social_api.jar')
+    implementation files('libs/SocialSDK_QQ_Simplify.jar')
 }
