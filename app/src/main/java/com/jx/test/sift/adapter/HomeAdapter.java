@@ -11,7 +11,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jx.test.R;
+
 import com.jx.test.search.SearchActivity;
+
+import com.jx.test.detail.ShiPActivity;
+
 import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.util.GlideImageLoader;
@@ -74,7 +78,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
                 public void OnBannerClick(int position) {
                     String dataId = mlist.get(0).getChildList().get(position).getDataId();
                     EventBus.getDefault().postSticky(new MyDataId(dataId));
-                    Toast.makeText(mContext, "点击了添加跳转页面", Toast.LENGTH_SHORT).show();
+                    mContext.startActivity(new Intent(mContext, ShiPActivity.class));
                 }
             });
         }else if(holder instanceof ViewHondlerB){

@@ -106,23 +106,23 @@ public class Fragment_mine extends Fragment {
                 break;
             case R.id.themmore:
                 int[] colors = new int[]{Color.YELLOW, Color.BLACK, Color.BLUE, Color.GRAY,
-                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
-                        Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
-                        Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
-                ColorPickerDialog dialog =
-                        // Constructor,the first argv is Context,second one is the colors you want to add
-                        new ColorPickerDialog(getActivity(), colors)
-                                .setOnColorChangedListener(new OnColorChangedListener() {
-                                    @Override
-                                    public void onColorChanged(int newColor) {
-                                        // do something here
-                                        Toast.makeText(getActivity(), "Color " + newColor, Toast.LENGTH_SHORT).show();
-                                        titleBarLayout.setBackgroundColor(newColor);
-                                    }
-                                })
-                                .build()
-                                .show();
-                break;
+                    Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
+                    Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
+                    Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
+            ColorPickerDialog dialog =
+                    // Constructor,the first argv is Context,second one is the colors you want to add
+                    new ColorPickerDialog(getActivity(), colors)
+                            .setOnColorChangedListener(new OnColorChangedListener() {
+                                @Override
+                                public void onColorChanged(int newColor) {
+                                    // do something here
+                                    Toast.makeText(getActivity(), "Color " + newColor, Toast.LENGTH_SHORT).show();
+                                    titleBarLayout.setBackgroundColor(newColor);
+                                }
+                            })
+                            .build()
+                            .show();
+            break;
             case R.id.mine_set:
                 startActivity(new Intent(getContext(), SetActivity.class));
                 break;
