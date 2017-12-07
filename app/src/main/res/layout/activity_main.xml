@@ -1,79 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.jx.test.utils.ResideLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:drakeet="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bg_colorful"
-    tools:context="com.jx.test.activity.MainActivity">
+    tools:context="com.jx.test.activity.MainActivity"
+    android:id="@+id/resideLayout">
 
-    <com.jx.test.utils.QQSliddingMenu
-        android:id="@+id/qqsm"
-        drakeet:rigthtPadding="160dp"
+    <RelativeLayout
         android:background="@mipmap/bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp">
 
-            <include layout="@layout/left_menu" />
+            <com.jx.test.utils.XCRoundImageView
+                android:id="@+id/roundImageView"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_centerInParent="true"
+                android:src="@mipmap/photo"
+                android:layout_marginLeft="5dp"/>
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:background="@mipmap/bg_colorful">
+            <TextView
+                android:id="@+id/tex_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="微淘,微一下"
+                style="@style/text"
+                android:padding="5dp"/>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/frame_layout"
-                    android:layout_above="@+id/btn_layout"
-                    >
-                </FrameLayout>
-
-                <LinearLayout
-                    android:id="@+id/btn_layout"
-                    android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/sc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_heart"/>
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="horizontal"
-                    android:background="@mipmap/bottom_bg"
-                    >
-                    <RadioGroup
-                        android:id="@+id/my_radiogroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <RadioButton
-                            android:id="@+id/rdb_sift"
-                            android:drawableTop="@drawable/select_nav_bottom_jing"
-                            android:text="精选"
-                            style="@style/navbottom_button" />
-                        <RadioButton
-                            android:id="@+id/rdb_special"
-                            android:drawableTop="@drawable/select_nav_bottom_zhuan"
-                            android:text="专题"
-                            style="@style/navbottom_button" />
-                        <RadioButton
-                            android:id="@+id/rdb_find"
-                            android:drawableTop="@drawable/select_nav_bottom_faxian"
-                            android:text="发现"
-                            style="@style/navbottom_button" />
-                        <RadioButton
-                            android:id="@+id/rdb_mine"
-                            android:drawableTop="@drawable/select_nav_bottom_mine"
-                            android:text="我的"
-                            style="@style/navbottom_button" />
-                    </RadioGroup>
-                </LinearLayout>
+                    android:text="我的收藏"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
 
-            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/load"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_download"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的下载"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_emo_cool"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="福利"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_share"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分享"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/jyfk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_undo"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="建议反馈"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_gear"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
         </LinearLayout>
-    </com.jx.test.utils.QQSliddingMenu>
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp">
+            <LinearLayout
+                android:id="@+id/gy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_users"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关于"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/zt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginLeft="10dp">
+                <ImageView
+                    style="@style/img_icon"
+                    android:src="@mipmap/ic_action_tshirt"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="主题"
+                    style="@style/text"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/frame_layout"
+            android:layout_above="@+id/btn_layout"
+            >
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:background="@mipmap/bottom_bg"
+            >
+            <RadioGroup
+                android:id="@+id/my_radiogroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rdb_sift"
+                    android:drawableTop="@drawable/select_nav_bottom_jing"
+                    android:text="精选"
+                    style="@style/navbottom_button" />
+                <RadioButton
+                    android:id="@+id/rdb_special"
+                    android:drawableTop="@drawable/select_nav_bottom_zhuan"
+                    android:text="专题"
+                    style="@style/navbottom_button" />
+                <RadioButton
+                    android:id="@+id/rdb_find"
+                    android:drawableTop="@drawable/select_nav_bottom_faxian"
+                    android:text="发现"
+                    style="@style/navbottom_button" />
+                <RadioButton
+                    android:id="@+id/rdb_mine"
+                    android:drawableTop="@drawable/select_nav_bottom_mine"
+                    android:text="我的"
+                    style="@style/navbottom_button" />
+            </RadioGroup>
+        </LinearLayout>
+    </RelativeLayout>
+
+</com.jx.test.utils.ResideLayout>
