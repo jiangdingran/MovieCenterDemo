@@ -42,7 +42,6 @@
         android:id="@+id/user_login_forgetpassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_below="@+id/userpass"
         android:layout_marginTop="30dp"
         android:layout_toLeftOf="@+id/user_login_head"

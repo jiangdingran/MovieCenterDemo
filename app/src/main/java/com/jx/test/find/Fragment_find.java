@@ -1,5 +1,6 @@
 package com.jx.test.find;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jx.test.R;
+import com.jx.test.detail.ShiPActivity;
 import com.jx.test.find.adapter.MyRecyclerAdapter;
 import com.jx.test.find.bean.HomeBean;
 import com.jx.test.find.cardswipelayout.CardItemTouchHelperCallback;
@@ -22,6 +24,9 @@ import com.jx.test.find.cardswipelayout.CardLayoutManager;
 import com.jx.test.find.cardswipelayout.OnSwipeListener;
 import com.jx.test.find.presenter.UserPresenter;
 import com.jx.test.find.view.IView;
+import com.jx.test.sift.bean.MyDataId;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -172,6 +177,13 @@ public class Fragment_find extends Fragment implements IView {
             public void onItemClick(View view, int position) {
                 Toast.makeText(getActivity(), position + " click" + mlist.get(position).getTitle(),
                         Toast.LENGTH_SHORT).show();
+
+                String dataId = mlist.get(position).getDataId();
+
+                EventBus.getDefault().postSticky(new MyDataId(dataId));
+                Intent intent = new Intent(getActivity(),ShiPActivity.class);
+                startActivity(intent);
+
             }
 
             @Override
