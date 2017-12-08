@@ -208,7 +208,34 @@
                 app:srcCompat="@mipmap/right" />
         </LinearLayout>
         <include layout="@layout/lines_view"/>
+        <LinearLayout
+            android:id="@+id/loginlayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@mipmap/ic_action_tshirt" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center_vertical"
+                android:text="登录"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                app:srcCompat="@mipmap/right" />
+        </LinearLayout>
+        <include layout="@layout/lines_view"/>
     </LinearLayout>
 
     <ImageView
