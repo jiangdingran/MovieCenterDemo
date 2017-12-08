@@ -7,5 +7,7 @@ import java.util.Map;
  */
 
 public interface Imodel {
-    void getShiPinData(String url, Map<String, String> map);
+    //评论
+    void getPingLun(String url, Map<String,String> map);
+
 }

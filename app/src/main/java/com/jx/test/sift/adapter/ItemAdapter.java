@@ -48,8 +48,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyItem> {
     @Override
     public void onBindViewHolder(final MyItem holder, int position) {
         ImageLoader instance = ImageLoader.getInstance();
-        instance.displayImage(clist.get(position).getChildList().get(0).getPic(),holder.img);
-        holder.tv.setText(clist.get(position).getChildList().get(0).getTitle());
+        instance.displayImage(clist.get(4).getChildList().get(position).getPic(),holder.img);
+        holder.tv.setText(clist.get(4).getChildList().get(position).getTitle());
         if (mOnItemClickLitener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

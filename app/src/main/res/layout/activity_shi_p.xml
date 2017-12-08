@@ -7,23 +7,9 @@
     tools:context=".detail.ShiPActivity"
     android:background="@mipmap/bg_colorful"
     android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/r1"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="#ff00"
-        >
-        <TextView
-            android:id="@+id/bf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="播放"
-            android:textSize="15dp"
-            android:textColor="#fff"
-            android:layout_centerInParent="true"
-            />
 
-    </RelativeLayout>
+
+        <include layout="@layout/title_bar"></include>
 
     <include
         layout="@layout/simple_player_view_player"

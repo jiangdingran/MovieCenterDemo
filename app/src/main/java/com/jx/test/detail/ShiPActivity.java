@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dou361.ijkplayer.widget.PlayStateParams;
@@ -26,25 +27,34 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ShiPActivity extends AppCompatActivity implements Sview {
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.title_bar_name)
+    TextView titleBarName;
+    @BindView(R.id.settv)
+    TextView settv;
     private List<Fragment> fragments;
     private FragmentAdapter adapter;
     private ViewPager viewpager;
     private TabLayout tablayout;
     private Spresenter spresenter;
     private String dataids;
-    private TextView bf;
     private PlayerView playerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shi_p);
-        spresenter=new Spresenter(this);
+        ButterKnife.bind(this);
+        spresenter = new Spresenter(this);
         EventBus.getDefault().register(ShiPActivity.this);
-
-        fragments=new ArrayList<Fragment>();
-        viewpager=(ViewPager)findViewById(R.id.viewpage);
-        bf=(TextView)findViewById(R.id.bf);
+        settv.setText("");
+        fragments = new ArrayList<Fragment>();
+        viewpager = (ViewPager) findViewById(R.id.viewpage);
         tablayout = (TabLayout) findViewById(R.id.tablayout);
         ContentFragment fragment1 = new ContentFragment();
         ContentFragments fragment2 = new ContentFragments();
@@ -52,9 +62,10 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
         fragments.add(fragment2);
 
         Bundle bundle = new Bundle();
-        bundle.putString("id",dataids);
+        bundle.putString("id", dataids);
         fragment1.setArguments(bundle);
-        adapter = new FragmentAdapter(getSupportFragmentManager(),fragments);
+        fragment2.setArguments(bundle);
+        adapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
 
         viewpager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewpager);
@@ -69,23 +80,25 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
                 .forbidTouch(false)
                 .setPlaySource(ret.getHDURL());
         playerView.startPlay();
-        bf.setText(ret.getTitle());
+        titleBarName.setText(ret.getTitle());
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(ShiPActivity.this);
         playerView.stopPlay();
     }
-    @Subscribe(threadMode = ThreadMode.POSTING,sticky = true)
-    public void onMoonEvent(MyDataId event){
+
+    @Subscribe(threadMode = ThreadMode.POSTING, sticky = true)
+    public void onMoonEvent(MyDataId event) {
         dataids = event.getDataids();
         event.setDataids(dataids);
 
-        HashMap<String,String> map=new HashMap<String, String>();
-        map.put("mediaId",dataids);
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("mediaId", dataids);
 
-        spresenter.getShiPindaTa("videoDetailApi/videoDetail.do?",map);
+        spresenter.getShiPindaTa("videoDetailApi/videoDetail.do?", map);
 
 
     }
