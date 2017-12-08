@@ -49,7 +49,7 @@ public class WelfareActivity extends BaseActivity implements IView {
         welfarePresenter = new WelfarePresenter(this);
         welfarePresenter.getUrl(Api.WEL_PATH);//P层中网络请求的方法
         titleBarName.setText("福利");
-        settv.setVisibility(View.GONE);
+        settv.setVisibility(View.INVISIBLE);
     }
 
     @Override
