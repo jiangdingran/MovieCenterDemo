@@ -1,11 +1,11 @@
 package com.jx.test.detail.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.jx.test.R;
 import com.jx.test.sift.bean.MyShiPinBean;
@@ -17,7 +17,7 @@ import java.util.List;
  * Created by 武晓瑞 on 2017/12/7.
  */
 
-public class GridAdapter extends BaseAdapter {
+public class GridAdapter extends RecyclerView.Adapter<GridAdapter.MyItem> {
     List<MyShiPinBean.RetBean.ListBean.ChildListBean> clist;
     Context mc;
     private View view;
@@ -28,39 +28,50 @@ public class GridAdapter extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
+    public MyItem onCreateViewHolder(ViewGroup parent, int viewType) {
+        MyItem holder = new MyItem(LayoutInflater.from(mc).inflate(R.layout.item_jian, parent, false));
+        return holder;
+    }
+
+    public interface OnItemClickLitener {
+        void onItemClick(View view, int position);
+    }
+
+    private GridAdapter.OnItemClickLitener mOnItemClickLitener;
+
+    public void setOnItemClickLitener(GridAdapter.OnItemClickLitener mOnItemClickLitener) {
+        this.mOnItemClickLitener = mOnItemClickLitener;
+    }
+
+    @Override
+    public void onBindViewHolder(final GridAdapter.MyItem holder, int position) {
+        ImageLoader instance = ImageLoader.getInstance();
+        instance.displayImage(clist.get(position).getPic(), holder.img);
+//        holder.tv.setText(clist.get(position).getTitle());
+        if (mOnItemClickLitener != null) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = holder.getLayoutPosition();
+                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
+                }
+            });
+        }
+    }
+
+    @Override
+    public int getItemCount() {
         return clist.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return clist.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder v1=null;
-        if(view==null){
-            view = View.inflate(mc, R.layout.item_jian, null);
-            v1=new ViewHolder();
-            v1.img=(ImageView)view.findViewById(R.id.item_simp);
-            v1.tv=(TextView)view.findViewById(R.id.item_text1);
-            view.setTag(v1);
-        }else{
-            v1= (ViewHolder) view.getTag();
-        }
-        ImageLoader instance = ImageLoader.getInstance();
-        instance.displayImage(clist.get(i).getPic(),v1.img);
-        v1.tv.setText(clist.get(i).getTitle());
-        return view;
-    }
-    class ViewHolder{
+    class MyItem extends RecyclerView.ViewHolder {
         ImageView img;
-        TextView tv;
+//        TextView tv;
+
+        public MyItem(View itemView) {
+            super(itemView);
+            img = (ImageView) itemView.findViewById(R.id.item_simp);
+//            tv = (TextView) itemView.findViewById(R.id.item_text1);
+        }
     }
 }

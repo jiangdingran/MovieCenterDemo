@@ -9,4 +9,5 @@ import com.jx.test.sift.bean.MyShiPinBean;
 
 public interface Sview {
     void getShiPin(MyShiPinBean.RetBean ret);
+
 }

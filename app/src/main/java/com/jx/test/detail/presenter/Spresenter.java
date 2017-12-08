@@ -3,9 +3,9 @@ package com.jx.test.detail.presenter;
 
 import android.util.Log;
 
+import com.jx.test.detail.view.Sview;
 import com.jx.test.sift.bean.MyShiPinBean;
 import com.jx.test.sift.model.Mmodel;
-import com.jx.test.detail.view.Sview;
 
 import java.util.Map;
 

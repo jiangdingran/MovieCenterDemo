@@ -1,11 +1,10 @@
 package com.jx.test.detail.model;
 
-import android.util.Log;
-
+import com.jx.test.detail.bean.MyComment;
 import com.jx.test.sift.API.Api;
 import com.jx.test.sift.API.Apiserver;
-import com.jx.test.sift.bean.MyShiPinBean;
 
+import java.util.List;
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -25,27 +24,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Mmodel implements Imodel {
 
     @Override
-    public void getShiPinData(String url,Map<String, String> map) {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.TYPE_HOME)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
+    public void getPingLun(String url, Map<String, String> map) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Api.TYPE_HOME).addConverterFactory(GsonConverterFactory.create()).addCallAdapterFactory(RxJava2CallAdapterFactory.create()).build();
         Apiserver apiserver = retrofit.create(Apiserver.class);
-        Observable<MyShiPinBean> shipin = apiserver.shipin(url, map);
-        shipin.subscribeOn(Schedulers.io())
+        Observable<MyComment> pinglun = apiserver.pinglun(url, map);
+        pinglun.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MyShiPinBean>() {
-
+                .subscribe(new Observer<MyComment>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(MyShiPinBean myShiPinBean) {
-                        MyShiPinBean.RetBean ret = myShiPinBean.getRet();
-                        Log.d("ssssss","sssss"+myShiPinBean.getCode());
-                        getshipinchuan.getShiPinUser(ret);
-
+                    public void onNext(MyComment myComment) {
+                        List<MyComment.RetBean.ListBean> list = myComment.getRet().getList();
+                        getpingchuan.getPingUser(list);
                     }
 
                     @Override
@@ -59,12 +53,13 @@ public class Mmodel implements Imodel {
                     }
                 });
     }
-    public interface getShiPinChuan{
-        void getShiPinUser(MyShiPinBean.RetBean ret);
+    public interface getPingChuan{
+        void getPingUser(List<MyComment.RetBean.ListBean> list);
     }
-    public getShiPinChuan getshipinchuan;
+    public getPingChuan getpingchuan;
 
-    public void setshipindata(getShiPinChuan getshipinchuan) {
-        this.getshipinchuan = getshipinchuan;
+    public void setpingdata(getPingChuan getpingchuan) {
+        this.getpingchuan = getpingchuan;
     }
+
 }

@@ -1,15 +1,20 @@
 package com.jx.test.detail.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.jx.test.R;
+import com.jx.test.detail.ShiPActivity;
+import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyShiPinBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import cn.carbs.android.expandabletextview.library.ExpandableTextView;
 
@@ -50,9 +55,18 @@ public class JianAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((ViewHondlerA)holder).mETV.setText(ret.getDescription());
         }else if(holder instanceof JianAdapter.ViewHondlerB){
             /*LinearLayoutManager manager = new LinearLayoutManager(mContext);
-            ((ViewHondlerB)holder).gridView.setLayoutManager(manager);*/
+            ((ViewHondlerB)holder).recyclerView.setLayoutManager(manager);*/
+            ((ViewHondlerB)holder).recyclerView.setLayoutManager(new GridLayoutManager(mContext,3));
             GridAdapter gridAdapter = new GridAdapter(ret.getList().get(0).getChildList(),mContext);
-            ((ViewHondlerB)holder).gridView.setAdapter(gridAdapter);
+            ((ViewHondlerB)holder).recyclerView.setAdapter(gridAdapter);
+            gridAdapter.setOnItemClickLitener(new GridAdapter.OnItemClickLitener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    String dataId = ret.getList().get(0).getChildList().get(position).getDataId();
+                    EventBus.getDefault().postSticky(new MyDataId(dataId));
+                    mContext.startActivity(new Intent(mContext, ShiPActivity.class));
+                }
+            });
         }
     }
     @Override
@@ -80,10 +94,10 @@ public class JianAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
     class ViewHondlerB extends RecyclerView.ViewHolder {
-        GridView gridView;
+        RecyclerView recyclerView;
         public ViewHondlerB(View itemView) {
             super(itemView);
-            gridView=(GridView)itemView.findViewById(R.id.jian_grid);
+            recyclerView=(RecyclerView)itemView.findViewById(R.id.jian_xrecy);
         }
     }
 }

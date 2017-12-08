@@ -1,6 +1,7 @@
 package com.jx.test.sift.API;
 
 
+import com.jx.test.detail.bean.MyComment;
 import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.bean.MyShiPinBean;
 
@@ -23,4 +24,7 @@ public interface Apiserver {
 
     @POST()
     Observable<MyShiPinBean> shipin(@Url String url, @QueryMap Map<String, String> map);
+
+    @POST()
+    Observable<MyComment> pinglun(@Url String url, @QueryMap Map<String, String> map);
 }

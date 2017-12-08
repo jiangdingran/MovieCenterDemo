@@ -7,15 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.jx.test.R;
-
-import com.jx.test.search.SearchActivity;
-
 import com.jx.test.detail.ShiPActivity;
-
+import com.jx.test.search.SearchActivity;
 import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.util.GlideImageLoader;
@@ -67,7 +63,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
                 }
             });
             alist=new ArrayList();
-            for (int i=0;i<mlist.get(0).getChildList().size();i++){
+            for (int i=1;i<mlist.get(0).getChildList().size();i++){
                 alist.add(mlist.get(0).getChildList().get(i).getPic());
             }
             ((ViewHondlerA)holder).myBanner.setImageLoader(new GlideImageLoader());
@@ -88,7 +84,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
             itemAdapter.setOnItemClickLitener(new ItemAdapter.OnItemClickLitener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Toast.makeText(mContext, "请点击轮播图，谢谢配合！", Toast.LENGTH_SHORT).show();
+                    String dataId = mlist.get(4).getChildList().get(position).getDataId();
+                    EventBus.getDefault().postSticky(new MyDataId(dataId));
+                    mContext.startActivity(new Intent(mContext, ShiPActivity.class));
+//                    Toast.makeText(mContext, "请点击轮播图，谢谢配合！", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -109,7 +108,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  
     }
     class ViewHondlerA extends RecyclerView.ViewHolder {
         Banner myBanner;
-        EditText searc;
+        TextView searc;
         public ViewHondlerA(View itemView) {
             super(itemView);
             searc=itemView.findViewById(R.id.edit_sou);
