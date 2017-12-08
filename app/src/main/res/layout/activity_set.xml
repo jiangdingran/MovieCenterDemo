@@ -45,10 +45,10 @@
             android:text="清理缓存"
             android:layout_weight="1"/>
         <TextView
+            android:id="@+id/text_hc"
             android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="28.00KB"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <LinearLayout
