@@ -1,11 +1,15 @@
 package com.jx.test.activity;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -28,9 +32,16 @@ import com.jx.test.special.Fragment_special;
 import com.jx.test.utils.ResideLayout;
 import com.jx.test.utils.XCRoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.socialize.ShareAction;
+import com.umeng.socialize.ShareContent;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
+import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
+import com.umeng.socialize.media.UMImage;
+import com.umeng.socialize.media.UMWeb;
+import com.umeng.socialize.shareboard.SnsPlatform;
+import com.umeng.socialize.utils.ShareBoardlistener;
 
 import java.util.Map;
 
@@ -95,6 +106,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        if(Build.VERSION.SDK_INT>=23){
+            String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
+            ActivityCompat.requestPermissions(this,mPermissionList,123);
+        }
         initView();
         rdbSift.setChecked(true);
         //侧滑的监听
@@ -179,7 +194,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt, R.id.roundImageView})
+    @OnClick({R.id.rdb_sift, R.id.rdb_special, R.id.rdb_find, R.id.rdb_mine, R.id.sc, R.id.load, R.id.fl, R.id.jyfk, R.id.sz, R.id.gy, R.id.zt, R.id.roundImageView,R.id.fx})
     public void onViewClicked(View view) {
         fm = getSupportFragmentManager();
         transaction = fm.beginTransaction();
@@ -222,6 +237,12 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, WelfareActivity.class));
                 break;
             case R.id.fx:
+                new ShareAction(MainActivity.this).setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ,SHARE_MEDIA.QZONE,SHARE_MEDIA.WEIXIN)
+                        .setContentList(new ShareContent(),new ShareContent())
+                        .withText("title")
+                        .setListenerList(shareListener,shareListener)
+                        .setShareboardclickCallback(shareBoardlistener)
+                        .open();
                 break;
             case R.id.jyfk:
                 break;
@@ -248,7 +269,6 @@ public class MainActivity extends BaseActivity {
                                     @Override
                                     public void onColorChanged(int newColor) {
                                         // do something here
-                                        Toast.makeText(MainActivity.this, "Color " + newColor, Toast.LENGTH_SHORT).show();
                                         chbg.setBackgroundColor(newColor);
                                     }
                                 })
@@ -262,7 +282,69 @@ public class MainActivity extends BaseActivity {
         transaction.commit();
         Log.d("sss", "onViewClicked: ddd");
     }
+    private ShareBoardlistener shareBoardlistener = new  ShareBoardlistener() {
 
+        @Override
+        public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
+            if (share_media==null){
+                if (snsPlatform.mKeyword.equals("11")){
+                    Toast.makeText(MainActivity.this,"add button success",Toast.LENGTH_LONG).show();
+                }
+
+            }
+            else {
+                UMImage image = new UMImage(MainActivity.this,
+                        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+                UMWeb web = new UMWeb("http://blog.csdn.net/qq_39357892" +
+                        "");
+                web.setTitle("Movie Center");//标题
+                web.setThumb(image);  //缩略图
+                web.setDescription("一个神奇的视频APP");//描述
+                new ShareAction(MainActivity.this).setPlatform(share_media).withMedia(web).setCallback(shareListener)
+                        .withText("一个神奇的视频播放APP")
+                        .share();
+            }
+        }
+    };
+    private UMShareListener shareListener = new UMShareListener() {
+        /**
+         * @descrption 分享开始的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onStart(SHARE_MEDIA platform) {
+
+        }
+
+        /**
+         * @descrption 分享成功的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onResult(SHARE_MEDIA platform) {
+            Toast.makeText(MainActivity.this,"成功了",Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @descrption 分享失败的回调
+         * @param platform 平台类型
+         * @param t 错误原因
+         */
+        @Override
+        public void onError(SHARE_MEDIA platform, Throwable t) {
+            Toast.makeText(MainActivity.this,"失败"+t.getMessage(),Toast.LENGTH_LONG).show();
+        }
+
+        /**
+         * @descrption 分享取消的回调
+         * @param platform 平台类型
+         */
+        @Override
+        public void onCancel(SHARE_MEDIA platform) {
+            Toast.makeText(MainActivity.this,"取消了",Toast.LENGTH_LONG).show();
+
+        }
+    };
     //第三方登录重写onactivityresult
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

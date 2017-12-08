@@ -17,8 +17,11 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.github.mummyding.colorpickerdialog.ColorPickerDialog;
 import com.github.mummyding.colorpickerdialog.OnColorChangedListener;
 import com.jx.test.R;
+import com.jx.test.activity.LoginActivity;
+import com.jx.test.activity.MeActivity;
 import com.jx.test.activity.SaveActivity;
 import com.jx.test.activity.SetActivity;
+import com.jx.test.mine.utils.SharedPreferencesUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,6 +80,8 @@ public class Fragment_mine extends Fragment {
     LinearLayout titleBarLayout;
     @BindView(R.id.gobackLayout)
     LinearLayout gobackLayout;
+    @BindView(R.id.loginlayout)
+    LinearLayout loginlayout;
 
     @Nullable
     @Override
@@ -94,7 +99,7 @@ public class Fragment_mine extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.historymore, R.id.loadmore, R.id.save, R.id.themmore, R.id.mine_set})
+    @OnClick({R.id.historymore, R.id.loadmore, R.id.save, R.id.themmore, R.id.mine_set,R.id.loginlayout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.historymore:
@@ -106,26 +111,43 @@ public class Fragment_mine extends Fragment {
                 break;
             case R.id.themmore:
                 int[] colors = new int[]{Color.YELLOW, Color.BLACK, Color.BLUE, Color.GRAY,
-                    Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
-                    Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
-                    Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
-            ColorPickerDialog dialog =
-                    // Constructor,the first argv is Context,second one is the colors you want to add
-                    new ColorPickerDialog(getActivity(), colors)
-                            .setOnColorChangedListener(new OnColorChangedListener() {
-                                @Override
-                                public void onColorChanged(int newColor) {
-                                    // do something here
-                                    Toast.makeText(getActivity(), "Color " + newColor, Toast.LENGTH_SHORT).show();
-                                    titleBarLayout.setBackgroundColor(newColor);
-                                }
-                            })
-                            .build()
-                            .show();
-            break;
+                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
+                        Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
+                        Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
+                ColorPickerDialog dialog =
+                        // Constructor,the first argv is Context,second one is the colors you want to add
+                        new ColorPickerDialog(getActivity(), colors)
+                                .setOnColorChangedListener(new OnColorChangedListener() {
+                                    @Override
+                                    public void onColorChanged(int newColor) {
+                                        // do something here
+                                        Toast.makeText(getActivity(), "Color " + newColor, Toast.LENGTH_SHORT).show();
+                                        titleBarLayout.setBackgroundColor(newColor);
+                                    }
+                                })
+                                .build()
+                                .show();
+                break;
             case R.id.mine_set:
                 startActivity(new Intent(getContext(), SetActivity.class));
                 break;
+            case R.id.loginlayout:
+
+                String login_code = SharedPreferencesUtils.getParam(getActivity(), "LOGIN_CODE", "3").toString();
+
+
+                if(login_code.equals("0")){
+                    Intent intent = new Intent(getActivity(), MeActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }
+
+
+                break;
         }
     }
+
+
 }

@@ -34,7 +34,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:background="@drawable/shape"
-
             android:text="换一批" />
     </RelativeLayout>
 

@@ -39,6 +39,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="我的"
+            android:textColor="#FFF"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
@@ -52,6 +53,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="清除"
+            android:textColor="#FFF"
             android:gravity="center"
             />
 
