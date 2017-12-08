@@ -8,6 +8,10 @@ public class PostionBean {
     private int pos;
     private String name;
 
+    public PostionBean(String name) {
+        this.name = name;
+    }
+
     public PostionBean(int pos, String name) {
         this.pos = pos;
         this.name = name;
