@@ -138,9 +138,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                System.out.println("uid========" + map.get("uid"));
-                System.out.println("name========" + map.get("name"));
-                System.out.println("iconurl========" + map.get("iconurl"));
                 //设置QQ头像
                 ImageLoader.getInstance().displayImage(map.get("iconurl"), roundImageView);
                 //设置QQ名字

@@ -1,6 +1,7 @@
 package com.jx.test.special.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,7 +9,11 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jx.test.R;
+import com.jx.test.detail.ShiPActivity;
+import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.special.bean.SpecialBean;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -41,7 +46,7 @@ public class GridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder=null;
         if (view==null){
             view=View.inflate(context, R.layout.layout_list_item,null);
@@ -57,7 +62,9 @@ public class GridAdapter extends BaseAdapter {
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String dataId = childList.get(i).getDataId();
+                EventBus.getDefault().postSticky(new MyDataId(dataId));
+                context.startActivity(new Intent(context, ShiPActivity.class));
             }
         });
         return view;
