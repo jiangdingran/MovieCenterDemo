@@ -1,4 +1,4 @@
-package com.jx.test.special.model;
+package com.jx.test.utils;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

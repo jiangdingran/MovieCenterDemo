@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jx.test.R;
@@ -35,6 +36,8 @@ public class Fragment_special extends Fragment implements Sview {
     TextView titleBarName;
     @BindView(R.id.settv)
     TextView settv;
+    @BindView(R.id.goback)
+    ImageView goback;
     private Mypresent mypresent;
     private SpecialAdapter specialAdapter;
 
@@ -48,6 +51,7 @@ public class Fragment_special extends Fragment implements Sview {
         unbinder = ButterKnife.bind(this, view);
         titleBarName.setText("专题");
         settv.setVisibility(View.INVISIBLE);
+        goback.setVisibility(View.GONE);
         return view;
     }
 
