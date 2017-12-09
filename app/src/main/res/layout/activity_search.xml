@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/bg_colorful"
+    android:orientation="vertical"
     tools:context="com.jx.test.search.SearchActivity">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="@color/colorAccent"
+    android:id="@+id/rtit"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/colorDeepOrangePrimary"
     >
     <EditText
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
+        android:id="@+id/shuru"
         android:drawableLeft="@mipmap/search"
         android:hint="请输入你喜欢的电影"
-        android:background="#e44"/>
+        android:background="#2066"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -24,7 +30,57 @@
         android:textColor="#fff"
         android:textSize="16sp"
         android:gravity="center"
+        android:id="@+id/seartv"
         android:layout_marginRight="15dp"
         android:text="取消"/>
 </RelativeLayout>
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_below="@id/rtit"
+        android:layout_margin="10dp"
+        android:id="@+id/jl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:text="搜索记录"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:id="@+id/clea"
+                android:background="@mipmap/search_clear"/>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rser"></android.support.v7.widget.RecyclerView>
+        <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:text="热门推荐"/>
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rmsre"></android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lear"
+        android:visibility="gone"
+        android:layout_below="@id/rtit">
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:numColumns="3"
+            android:id="@+id/sgr"></GridView>
+    </LinearLayout>
+</RelativeLayout>

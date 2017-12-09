@@ -3,6 +3,7 @@ package com.jx.test.special.model;
 import com.jx.test.special.api.API;
 import com.jx.test.special.api.IServise;
 import com.jx.test.special.bean.SpecialBean;
+import com.jx.test.utils.RetrofitUtil;
 
 import java.util.List;
 
