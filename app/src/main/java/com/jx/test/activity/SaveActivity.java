@@ -46,8 +46,6 @@ public class SaveActivity extends BaseActivity {
     CollectGridAdapter adapter;
 
     List<CollectBean> list;
-    @BindView(R.id.collect_clear)
-    Button collectClear;
 
     @Override
     protected int getRootView() {
@@ -77,10 +75,7 @@ public class SaveActivity extends BaseActivity {
 
     }
 
-//    @OnClick(R.id.goback)
-//    public void onViewClicked() {
-//        finish();
-//    }
+
 
     public void initdata() {
         list = userDao.queryBuilder()
@@ -107,13 +102,13 @@ public class SaveActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.goback, R.id.collect_clear})
+    @OnClick({R.id.goback, R.id.settv})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.goback:
                 finish();
                 break;
-            case R.id.collect_clear:
+            case R.id.settv:
 
                 for(int i = 0 ; i < list.size();i++){
                     userDao.delete(list.get(i));

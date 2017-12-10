@@ -31,12 +31,13 @@ public class WelcomeActivity extends BaseActivity {
         animationSet.addAnimation(scaleAnimation);
         //启动动画
         WelcomeActivity.this.wcom.startAnimation(animationSet);
+        //动画监听
         scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
             }
-
+            //动画结束跳转
             @Override
             public void onAnimationEnd(Animation animation) {
                 startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
