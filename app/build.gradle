@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 26
 
@@ -28,6 +28,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.jx.test.find.greendao.gen'
+        targetGenDir 'src/main/java'
+    }
+
 }
 
 dependencies {
@@ -81,4 +88,8 @@ dependencies {
     implementation files('libs/umeng_social_shareview.jar')
     implementation files('libs/umeng_social_net.jar')
     implementation files('libs/umeng_social_tool.jar')
+
+    compile 'org.greenrobot:greendao:3.2.0'
+
+
 }
