@@ -23,9 +23,9 @@
                 android:id="@+id/roundImageView"
                 android:layout_width="85dp"
                 android:layout_height="85dp"
-                android:layout_centerInParent="true"
                 android:src="@mipmap/photo"
-                android:layout_marginLeft="5dp"/>
+                android:padding="10dp"
+                android:layout_marginLeft="12dp"/>
 
             <TextView
                 android:id="@+id/tex_name"
@@ -33,14 +33,12 @@
                 android:layout_height="wrap_content"
                 android:text="微淘,微一下"
                 style="@style/text"
-                android:padding="5dp"/>
+                android:padding="10dp"
+                android:layout_marginLeft="9dp"/>
 
             <LinearLayout
                 android:id="@+id/sc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                style="@style/ch_item">
                 <ImageView
                     style="@style/img_icon"
                     android:src="@mipmap/ic_action_heart"/>
@@ -54,10 +52,7 @@
 
             <LinearLayout
                 android:id="@+id/load"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                style="@style/ch_item">
                 <ImageView
                     style="@style/img_icon"
                     android:src="@mipmap/ic_action_download"/>
@@ -71,10 +66,7 @@
 
             <LinearLayout
                 android:id="@+id/fl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                style="@style/ch_item">
                 <ImageView
                     style="@style/img_icon"
                     android:src="@mipmap/ic_action_emo_cool"/>
@@ -88,10 +80,7 @@
 
             <LinearLayout
                 android:id="@+id/fx"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                style="@style/ch_item">
                 <ImageView
                     style="@style/img_icon"
                     android:src="@mipmap/ic_action_share"/>
@@ -105,10 +94,7 @@
 
             <LinearLayout
                 android:id="@+id/jyfk"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                style="@style/ch_item">
                 <ImageView
                     style="@style/img_icon"
                     android:src="@mipmap/ic_action_undo"/>
@@ -122,10 +108,7 @@
 
             <LinearLayout
                 android:id="@+id/sz"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp">
+                style="@style/ch_item">
                 <ImageView
                     style="@style/img_icon"
                     android:src="@mipmap/ic_action_gear"/>
