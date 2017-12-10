@@ -88,7 +88,7 @@ public class Fragment_mine extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_mine, null);
         unbinder = ButterKnife.bind(this, view);
-        gobackLayout.setVisibility(View.GONE);
+        goback.setVisibility(View.GONE);
         settv.setVisibility(View.GONE);
         return view;
     }

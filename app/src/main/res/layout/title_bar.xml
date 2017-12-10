@@ -4,22 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/title_bar_layout"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="#00bcd4"
-    android:orientation="horizontal">
+    android:background="#e66844"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/gobackLayout"
-            android:paddingTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:paddingTop="15dp">
 
             <ImageView
                 android:id="@+id/goback"
@@ -40,22 +45,29 @@
             android:gravity="center"
             android:text="我的"
             android:textColor="#FFF"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
-        <TextView
-            android:id="@+id/settv"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="清除"
-            android:textColor="#FFF"
-            android:gravity="center"
-            />
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/settv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="清除"
+                android:textColor="#FFF" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -5,6 +5,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -13,6 +17,8 @@ import android.widget.Toast;
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
 import com.jx.test.R;
+import com.jx.test.activity.BaseActivity;
+import com.jx.test.activity.MainActivity;
 import com.jx.test.detail.adapter.FragmentAdapter;
 import com.jx.test.detail.presenter.Spresenter;
 import com.jx.test.detail.view.ContentFragment;
@@ -37,15 +43,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ShiPActivity extends AppCompatActivity implements Sview {
+public class ShiPActivity extends BaseActivity implements Sview {
     @BindView(R.id.goback)
     ImageView goback;
     @BindView(R.id.title_bar_name)
     TextView titleBarName;
     @BindView(R.id.settv)
     TextView settv;
-    @BindView(R.id.btn_collect)
-    Button btnCollect;
+
     private List<Fragment> fragments;
     private FragmentAdapter adapter;
     private ViewPager viewpager;
@@ -61,11 +66,12 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
     CollectBeanDao userDao;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shi_p);
-        ButterKnife.bind(this);
+    protected int getRootView() {
+        return R.layout.activity_shi_p;
+    }
 
+    @Override
+    protected void init() {
         //初始化管理的包（后面new的OpenHelper包）
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
         DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
@@ -75,6 +81,7 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
 
         spresenter = new Spresenter(this);
         EventBus.getDefault().register(ShiPActivity.this);
+        settv.setBackgroundResource(R.mipmap.collection);
         settv.setText("");
         fragments = new ArrayList<Fragment>();
         viewpager = (ViewPager) findViewById(R.id.viewpage);
@@ -92,6 +99,32 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
 
         viewpager.setAdapter(adapter);
         tablayout.setupWithViewPager(viewpager);
+        settv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                settv.setBackgroundResource(R.mipmap.collection_select);
+                AnimationSet animationSet = new AnimationSet(true);
+
+                ScaleAnimation scaleAnimation = new ScaleAnimation(1,0.5f,1,0.5f,
+                        Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+                //3秒完成动画
+                scaleAnimation.setDuration(2000);
+                //将AlphaAnimation这个已经设置好的动画添加到 AnimationSet中
+                animationSet.addAnimation(scaleAnimation);
+                //启动动画
+                ShiPActivity.this.settv.startAnimation(animationSet);
+                //收藏
+                CollectBean collectBean = new CollectBean(null,movieid,moviepic,moviename);
+                userDao.insert(collectBean);
+                Toast.makeText(ShiPActivity.this, "已收藏", Toast.LENGTH_SHORT).show();
+            }
+        });
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -132,10 +165,4 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
 
     }
 
-    @OnClick(R.id.btn_collect)
-    public void onViewClicked() {
-        CollectBean collectBean = new CollectBean(null,movieid,moviepic,moviename);
-        userDao.insert(collectBean);
-        Toast.makeText(this, "已收藏", Toast.LENGTH_SHORT).show();
-    }
 }
