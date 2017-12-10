@@ -26,6 +26,10 @@ import com.github.mummyding.colorpickerdialog.ColorPickerDialog;
 import com.github.mummyding.colorpickerdialog.OnColorChangedListener;
 import com.jx.test.R;
 import com.jx.test.find.Fragment_find;
+import com.jx.test.find.greendao.HistroyBean;
+import com.jx.test.find.greendao.gen.DaoMaster;
+import com.jx.test.find.greendao.gen.DaoSession;
+import com.jx.test.find.greendao.gen.HistroyBeanDao;
 import com.jx.test.mine.Fragment_mine;
 import com.jx.test.sift.Fragment_sift;
 import com.jx.test.special.Fragment_special;
@@ -43,6 +47,7 @@ import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -99,6 +104,9 @@ public class MainActivity extends BaseActivity {
     FragmentManager fm;
     FragmentTransaction transaction;
 
+    List<HistroyBean> list;
+    HistroyBeanDao userDao;
+
     @Override
     protected int getRootView() {
         return R.layout.activity_main;
@@ -106,6 +114,13 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
+
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
+        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        //UserDao接受
+        userDao = daoSession.getHistroyBeanDao();
+
         if(Build.VERSION.SDK_INT>=23){
             String[] mPermissionList = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.CALL_PHONE,Manifest.permission.READ_LOGS,Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.SET_DEBUG_APP,Manifest.permission.SYSTEM_ALERT_WINDOW,Manifest.permission.GET_ACCOUNTS,Manifest.permission.WRITE_APN_SETTINGS};
             ActivityCompat.requestPermissions(this,mPermissionList,123);
@@ -223,6 +238,12 @@ public class MainActivity extends BaseActivity {
                 transaction.hide(fragment_find);
                 transaction.hide(fragment_sift);
                 transaction.hide(fragment_special);
+                list = userDao.queryBuilder()
+                        .build().list();
+
+                fragment_mine.getData(list);
+
+
                 break;
             case R.id.sc:
                 startActivity(new Intent(MainActivity.this, SaveActivity.class));
