@@ -19,9 +19,11 @@ import com.jx.test.detail.view.ContentFragment;
 import com.jx.test.detail.view.ContentFragments;
 import com.jx.test.detail.view.Sview;
 import com.jx.test.find.greendao.CollectBean;
+import com.jx.test.find.greendao.HistroyBean;
 import com.jx.test.find.greendao.gen.CollectBeanDao;
 import com.jx.test.find.greendao.gen.DaoMaster;
 import com.jx.test.find.greendao.gen.DaoSession;
+import com.jx.test.find.greendao.gen.HistroyBeanDao;
 import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyShiPinBean;
 
@@ -59,7 +61,9 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
     String moviepic;
 
     CollectBeanDao userDao;
-
+    
+    HistroyBeanDao histroDao;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +76,10 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
         DaoSession daoSession = daoMaster.newSession();
         //UserDao接受
         userDao = daoSession.getCollectBeanDao();
+        histroDao = daoSession.getHistroyBeanDao();
 
+
+        
         spresenter = new Spresenter(this);
         EventBus.getDefault().register(ShiPActivity.this);
         settv.setText("");
@@ -108,6 +115,10 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
         moviepic = ret.getPic();
         moviename = ret.getTitle();
 
+        histroDao.insert(new HistroyBean(null,movieid,moviepic,moviename));
+
+        Toast.makeText(this, "加入历史", Toast.LENGTH_SHORT).show();
+        
     }
 
     @Override
