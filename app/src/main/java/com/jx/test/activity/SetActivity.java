@@ -72,7 +72,7 @@ public class SetActivity extends BaseActivity {
             case R.id.tj:
                final AlertDialog.Builder builder = new AlertDialog.Builder(
                         SetActivity.this);
-                builder.setIcon(R.mipmap.ic_action_emo_wink);//提示图标
+                builder.setIcon(R.mipmap.ic_action_emo_wink2);//提示图标
                 builder.setTitle("发现一个看片神器");//提示标题
                 builder.setMessage("https://github.com/jiangdingran/MovieCenterDemo");//提示内容
                 builder.setPositiveButton("复制", new DialogInterface.OnClickListener() {//复制(确定按钮)
@@ -101,7 +101,7 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.gy:
                 AlertDialog.Builder builder2 = new AlertDialog.Builder(SetActivity.this);//当前环境
-                builder2.setIcon(R.mipmap.ic_action_users);//提示图标
+                builder2.setIcon(R.mipmap.ic_action_users2);//提示图标
                 builder2.setTitle("关于我们");//提示框标题
                 builder2.setMessage("关于我们?" + "\n" + "我们是一群...呃...无所谓了");//提示内容
                 builder2.setNegativeButton("关闭", null);//关闭按钮
@@ -109,7 +109,7 @@ public class SetActivity extends BaseActivity {
                 break;
             case R.id.jy:
                 AlertDialog.Builder builder3 = new AlertDialog.Builder(SetActivity.this);//当前环境
-                builder3.setIcon(R.mipmap.ic_action_undo);//提示图标
+                builder3.setIcon(R.mipmap.ic_action_undo2);//提示图标
                 builder3.setTitle("建议反馈");//提示框标题
                 builder3.setMessage("做项目很辛苦的" + "\n" + "还想挑错?"+ "\n" + "别逗了....");//提示内容
                 builder3.setNegativeButton("关闭", null);//关闭按钮

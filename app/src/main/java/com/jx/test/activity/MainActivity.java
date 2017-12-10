@@ -225,7 +225,7 @@ public class MainActivity extends BaseActivity {
                 transaction.hide(fragment_special);
                 break;
             case R.id.sc:
-                startActivity(new Intent(MainActivity.this, CollectActivity.class));
+                startActivity(new Intent(MainActivity.this, SaveActivity.class));
                 break;
             case R.id.load:
                 Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();
@@ -243,7 +243,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.jyfk:
                 AlertDialog.Builder builder3 = new AlertDialog.Builder(MainActivity.this);//当前环境
-                builder3.setIcon(R.mipmap.ic_action_undo);//提示图标
+                builder3.setIcon(R.mipmap.ic_action_undo2);//提示图标
                 builder3.setTitle("建议反馈");//提示框标题
                 builder3.setMessage("对不起,建议反馈操作只针对VIP用户开放" + "\n" + "如果您想继续,请前往开通VIP"+ "\n" + "\n" + "还有...."+ "\n" + "我没有做开通VIP服务");//提示内容
                 builder3.setNegativeButton("关闭", null);//关闭按钮
@@ -254,7 +254,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.gy:
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);//当前环境
-                builder.setIcon(R.mipmap.ic_action_users);//提示图标
+                builder.setIcon(R.mipmap.ic_action_users2);//提示图标
                 builder.setTitle("关于我们");//提示框标题
                 builder.setMessage("点开并没有什么" + "\n" + "但请记住,我们是:景行工作室");//提示内容
                 builder.setNegativeButton("关闭", null);//关闭按钮
