@@ -5,8 +5,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dou361.ijkplayer.widget.PlayStateParams;
 import com.dou361.ijkplayer.widget.PlayerView;
@@ -16,6 +18,10 @@ import com.jx.test.detail.presenter.Spresenter;
 import com.jx.test.detail.view.ContentFragment;
 import com.jx.test.detail.view.ContentFragments;
 import com.jx.test.detail.view.Sview;
+import com.jx.test.find.greendao.CollectBean;
+import com.jx.test.find.greendao.gen.CollectBeanDao;
+import com.jx.test.find.greendao.gen.DaoMaster;
+import com.jx.test.find.greendao.gen.DaoSession;
 import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyShiPinBean;
 
@@ -29,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ShiPActivity extends AppCompatActivity implements Sview {
     @BindView(R.id.goback)
@@ -37,6 +44,8 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
     TextView titleBarName;
     @BindView(R.id.settv)
     TextView settv;
+    @BindView(R.id.btn_collect)
+    Button btnCollect;
     private List<Fragment> fragments;
     private FragmentAdapter adapter;
     private ViewPager viewpager;
@@ -45,11 +54,25 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
     private String dataids;
     private PlayerView playerView;
 
+    String movieid;
+    String moviename;
+    String moviepic;
+
+    CollectBeanDao userDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shi_p);
         ButterKnife.bind(this);
+
+        //初始化管理的包（后面new的OpenHelper包）
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
+        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        //UserDao接受
+        userDao = daoSession.getCollectBeanDao();
+
         spresenter = new Spresenter(this);
         EventBus.getDefault().register(ShiPActivity.this);
         settv.setText("");
@@ -81,6 +104,10 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
                 .setPlaySource(ret.getHDURL());
         playerView.startPlay();
         titleBarName.setText(ret.getTitle());
+
+        moviepic = ret.getPic();
+        moviename = ret.getTitle();
+
     }
 
     @Override
@@ -95,6 +122,8 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
         dataids = event.getDataids();
         event.setDataids(dataids);
 
+        movieid = dataids;
+
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("mediaId", dataids);
 
@@ -103,4 +132,10 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
 
     }
 
+    @OnClick(R.id.btn_collect)
+    public void onViewClicked() {
+        CollectBean collectBean = new CollectBean(null,movieid,moviepic,moviename);
+        userDao.insert(collectBean);
+        Toast.makeText(this, "已收藏", Toast.LENGTH_SHORT).show();
+    }
 }
