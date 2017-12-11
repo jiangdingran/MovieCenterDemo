@@ -148,6 +148,11 @@ public class ShiPActivity extends BaseActivity implements Sview {
         moviepic = ret.getPic();
         moviename = ret.getTitle();
 
+        List<HistroyBean> userList = histroDao.queryBuilder()
+                .where(HistroyBeanDao.Properties.Moviename.eq(moviename)).build().list();
+        for (HistroyBean user : userList ){
+            histroDao.delete(user);
+        }
         histroDao.insert(new HistroyBean(null,movieid,moviepic,moviename));
 
         Toast.makeText(this, "加入历史", Toast.LENGTH_SHORT).show();
@@ -167,6 +172,8 @@ public class ShiPActivity extends BaseActivity implements Sview {
         event.setDataids(dataids);
 
         movieid = dataids;
+
+
 
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("mediaId", dataids);
