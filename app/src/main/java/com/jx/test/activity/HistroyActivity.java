@@ -1,21 +1,30 @@
 package com.jx.test.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.jx.test.R;
+import com.jx.test.detail.ShiPActivity;
 import com.jx.test.find.adapter.HistoryGridAdapter;
 import com.jx.test.find.greendao.HistroyBean;
 import com.jx.test.find.greendao.gen.DaoMaster;
 import com.jx.test.find.greendao.gen.DaoSession;
 import com.jx.test.find.greendao.gen.HistroyBeanDao;
+import com.jx.test.sift.bean.MyDataId;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HistroyActivity extends AppCompatActivity {
 
@@ -26,6 +35,8 @@ public class HistroyActivity extends AppCompatActivity {
     GridView gridView;
 
     HistoryGridAdapter adapter;
+    @BindView(R.id.history_clear)
+    Button historyClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +63,28 @@ public class HistroyActivity extends AppCompatActivity {
         }
         Log.d("myMain", list.toString() + "    " + list.size());
 
-        adapter = new HistoryGridAdapter(list,HistroyActivity.this);
+        adapter = new HistoryGridAdapter(list, HistroyActivity.this);
         gridView.setAdapter(adapter);
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                EventBus.getDefault().postSticky(new MyDataId(list.get(i).getMovieid()));
+
+                Intent intent = new Intent(HistroyActivity.this, ShiPActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    @OnClick(R.id.history_clear)
+    public void onViewClicked() {
+        for(int i = 0 ; i < list.size();i++){
+            userDao.delete(list.get(i));
+        }
+
+        list.clear();
+        adapter.notifyDataSetChanged();
     }
 }

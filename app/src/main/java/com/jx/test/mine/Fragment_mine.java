@@ -216,11 +216,14 @@ public class Fragment_mine extends Fragment {
     }
 
     public void getData(List<HistroyBean> list) {
+        h1.setVisibility(View.GONE);
+        h2.setVisibility(View.GONE);
+        h3.setVisibility(View.GONE);
         idlist.clear();
         //Log.d("myMain", "==" + list.get(0).getMoviename());
         int j = 0;
 
-        for (int i = list.size() - 1; i > 0; i--) {
+        for (int i = list.size() - 1; i >= 0; i--) {
             if (i < list.size() - 3) {
                 Log.d("myMain", "就三个");
             } else {

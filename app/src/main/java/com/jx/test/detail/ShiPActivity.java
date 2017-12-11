@@ -173,8 +173,6 @@ public class ShiPActivity extends BaseActivity implements Sview {
 
         movieid = dataids;
 
-
-
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("mediaId", dataids);
 
