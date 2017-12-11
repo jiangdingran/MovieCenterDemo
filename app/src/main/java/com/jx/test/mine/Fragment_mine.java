@@ -220,7 +220,7 @@ public class Fragment_mine extends Fragment {
         //Log.d("myMain", "==" + list.get(0).getMoviename());
         int j = 0;
 
-        for (int i = list.size() - 1; i > 0; i--) {
+        for (int i = list.size() - 1; i >= 0; i--) {
             if (i < list.size() - 3) {
                 Log.d("myMain", "就三个");
             } else {

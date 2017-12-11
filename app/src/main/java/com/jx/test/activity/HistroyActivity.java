@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 
 import com.jx.test.R;
@@ -23,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class HistroyActivity extends AppCompatActivity {
 
@@ -33,6 +35,8 @@ public class HistroyActivity extends AppCompatActivity {
     GridView gridView;
 
     HistoryGridAdapter adapter;
+    @BindView(R.id.history_clear)
+    Button historyClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +63,7 @@ public class HistroyActivity extends AppCompatActivity {
         }
         Log.d("myMain", list.toString() + "    " + list.size());
 
-        adapter = new HistoryGridAdapter(list,HistroyActivity.this);
+        adapter = new HistoryGridAdapter(list, HistroyActivity.this);
         gridView.setAdapter(adapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,5 +76,15 @@ public class HistroyActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @OnClick(R.id.history_clear)
+    public void onViewClicked() {
+        for(int i = 0 ; i < list.size();i++){
+            userDao.delete(list.get(i));
+        }
+
+        list.clear();
+        adapter.notifyDataSetChanged();
     }
 }
