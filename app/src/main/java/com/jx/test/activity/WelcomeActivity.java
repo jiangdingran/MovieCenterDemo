@@ -22,25 +22,27 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        AnimationSet animationSet = new AnimationSet(true);
-        ScaleAnimation scaleAnimation = new ScaleAnimation(1,1f,1.3f,1.1f,
-                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-        //3秒完成动画
-        scaleAnimation.setDuration(3000);
-        //将AlphaAnimation这个已经设置好的动画添加到 AnimationSet中
-        animationSet.addAnimation(scaleAnimation);
-        //启动动画
-        WelcomeActivity.this.wcom.startAnimation(animationSet);
+        //初始化ScaleAnimation
+        ScaleAnimation animation = new ScaleAnimation(1f, 1.2f, 1f, 1.2f, Animation.RELATIVE_TO_SELF, 0f, Animation.RELATIVE_TO_SELF, 0.5f);
+        //动画执行时间
+        animation.setDuration(3000);
+        //动画重复次数-1表示不停重复
+        //animation.setRepeatCount(-1);
+        //给控件设置动画
+        animation.setFillAfter(true);//播放完成之后保持状态
+        wcom.startAnimation(animation);
+
         //动画监听
-        scaleAnimation.setAnimationListener(new Animation.AnimationListener() {
+        animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
 
             }
+
             //动画结束跳转
             @Override
             public void onAnimationEnd(Animation animation) {
-                startActivity(new Intent(WelcomeActivity.this,MainActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                 finish();
             }
 

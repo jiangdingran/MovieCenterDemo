@@ -1,4 +1,4 @@
-package com.jx.test.sift;
+package com.jx.test.sift.view;
 
 
 import android.content.Intent;

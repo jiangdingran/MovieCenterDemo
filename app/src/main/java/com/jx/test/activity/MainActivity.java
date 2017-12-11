@@ -31,7 +31,7 @@ import com.jx.test.find.greendao.gen.DaoMaster;
 import com.jx.test.find.greendao.gen.DaoSession;
 import com.jx.test.find.greendao.gen.HistroyBeanDao;
 import com.jx.test.mine.Fragment_mine;
-import com.jx.test.sift.Fragment_sift;
+import com.jx.test.sift.view.Fragment_sift;
 import com.jx.test.special.Fragment_special;
 import com.jx.test.utils.ResideLayout;
 import com.jx.test.utils.XCRoundImageView;
@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
-
+        chbg.setBackgroundResource(R.mipmap.bg_colorful);
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
         DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
         DaoSession daoSession = daoMaster.newSession();
