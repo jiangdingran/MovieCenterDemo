@@ -1,16 +1,22 @@
 package com.jx.test.sift.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.jx.test.R;
+import com.jx.test.detail.ShiPActivity;
+import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyHome;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -50,19 +56,20 @@ public class HomeAdapter extends XRecyclerView.Adapter<HomeAdapter.MyViewHolder>
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position)
+    public void onBindViewHolder(final MyViewHolder holder, final int position)
     {
         holder.img.setImageURI(mlist.get(4).getChildList().get(position).getPic(),holder.img);
         holder.tv.setText(mlist.get(4).getChildList().get(position).getTitle());
-        if (mOnItemClickLitener != null) {
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = holder.getLayoutPosition();
-                    mOnItemClickLitener.onItemClick(holder.itemView, pos);
+                    String dataId = mlist.get(4).getChildList().get(position).getDataId();
+                    Toast.makeText(mContext, dataId+"fragment", Toast.LENGTH_SHORT).show();
+                    EventBus.getDefault().postSticky(new MyDataId(dataId));
+                    mContext.startActivity(new Intent(mContext, ShiPActivity.class));
                 }
             });
-        }
     }
 
     @Override

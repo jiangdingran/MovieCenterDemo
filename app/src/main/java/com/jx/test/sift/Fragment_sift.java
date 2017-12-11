@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -49,12 +50,22 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
     SwipeRefreshLayout idSwipe;
     @BindView(R.id.sift_xr)
     XRecyclerView siftXr;
+    @BindView(R.id.title_bar_name)
+    TextView titleBarName;
+    @BindView(R.id.settv)
+    TextView settv;
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.title_bar_layout)
+    LinearLayout titleBarLayout;
+
     private TextView line;
     private HomeAdapter adapter;
     private int imageHeight = 100; //设置渐变高度，一般为导航图片高度，自己控制
     private Mpresenter mpresenter;
     private XBanner mybanner;
     private TextView edit_sou;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
@@ -63,9 +74,11 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
         View view = inflater.inflate(R.layout.fragment_sift, null);
         unbinder = ButterKnife.bind(this, view);
         View abnv = View.inflate(getActivity(), R.layout.layout_bann, null);
-        line=(TextView)view.findViewById(R.id.line);
-        mybanner=(XBanner)abnv.findViewById(R.id.mybanner);
-        edit_sou=(TextView)abnv.findViewById(R.id.edit_sou);
+//        line = (TextView) view.findViewById(R.id.line);
+        settv.setText("");
+        goback.setVisibility(View.INVISIBLE);
+        mybanner = (XBanner) abnv.findViewById(R.id.mybanner);
+        edit_sou = (TextView) abnv.findViewById(R.id.edit_sou);
         edit_sou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +86,7 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
             }
         });
         //搜索框在布局最上面
-        line.bringToFront();
+        titleBarLayout.bringToFront();
         //滑动监听
         siftXr.addHeaderView(abnv);
         siftXr.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -83,20 +96,20 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 y += dy;
                 if (y <= 0) {
-                    line.setText("精选");
-                    line.setBackgroundColor(Color.argb((int) 0, 227, 29, 26));//AGB由相关工具获得，或者美工提供
-                    line.setTextColor(Color.argb(0, 255, 255, 255));
+                    titleBarName.setText("精选");
+                    titleBarLayout.getBackground().setAlpha(0);//AGB由相关工具获得，或者美工提供
+                    titleBarName.setTextColor(Color.argb(0, 255, 255, 255));
                 } else if (y > 0 && y <= imageHeight) {
                     float scale = (float) y / imageHeight;
                     float alpha = (255 * scale);
                     // 只是layout背景透明
-                    line.setText("精选");
-                    line.setBackgroundColor(Color.argb((int) alpha, 227, 29, 26));
-                    line.setTextColor(Color.argb((int) alpha, 255, 255, 255));
+                    titleBarName.setText("精选");
+                    titleBarLayout.setBackgroundColor(Color.argb((int) alpha, 227, 29, 26));
+                    titleBarName.setTextColor(Color.argb((int) alpha, 255, 255, 255));
                 } else {
-                    line.setText("精选");
-                    line.setBackgroundColor(Color.argb((int) 255, 227, 29, 26));
-                    line.setTextColor(Color.argb((int) 225, 255, 255, 255));
+                    titleBarName.setText("精选");
+                    titleBarLayout.setBackgroundColor(Color.argb((int) 255, 227, 29, 26));
+                    titleBarName.setTextColor(Color.argb((int) 225, 255, 255, 255));
                 }
 
             }
@@ -132,14 +145,16 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
     }
 
     @Override
-    public void getHome(List<MyHome.RetBean.ListBean> list) {
+    public void getHome(final List<MyHome.RetBean.ListBean> list) {
         final List<MyHome.RetBean.ListBean.ChildListBean> childList = list.get(0).getChildList();
         siftXr.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new HomeAdapter(list, getActivity());
         siftXr.setAdapter(adapter);
         final List<String> xbanimg = new ArrayList<>();
         for (int i = 0; i < childList.size(); i++) {
-            xbanimg.add(childList.get(i).getPic());
+            if (i!=2){
+                xbanimg.add(childList.get(i).getPic());
+            }
         }
         mybanner.setData(xbanimg, null);
         mybanner.setmAdapter(new XBanner.XBannerAdapter() {
@@ -149,19 +164,21 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
             }
         });
         mybanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+
+
+            private String dataId;
+
             @Override
             public void onItemClick(XBanner banner, int position) {
-                String dataId = childList.get(position).getDataId();
+                if (position>=2){
+                    dataId = list.get(0).getChildList().get(position+1).getDataId();
+                }else {
+                    dataId = list.get(0).getChildList().get(position).getDataId();
+                }
                 EventBus.getDefault().postSticky(new MyDataId(dataId));
                 startActivity(new Intent(getActivity(), ShiPActivity.class));
-            }
-        });
-        adapter.setOnItemClickLitener(new HomeAdapter.OnItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                String dataId = childList.get(position).getDataId();
-                EventBus.getDefault().postSticky(new MyDataId(dataId));
-                startActivity(new Intent(getActivity(), ShiPActivity.class));
+
+
             }
         });
 
