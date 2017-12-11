@@ -88,8 +88,6 @@ dependencies {
     implementation files('libs/umeng_social_shareview.jar')
     implementation files('libs/umeng_social_net.jar')
     implementation files('libs/umeng_social_tool.jar')
-
     compile 'org.greenrobot:greendao:3.2.0'
-
-
+    implementation files('libs/Msc.jar')
 }
