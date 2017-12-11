@@ -121,9 +121,11 @@ public class ShiPActivity extends AppCompatActivity implements Sview {
     public void onMoonEvent(MyDataId event) {
         dataids = event.getDataids();
         event.setDataids(dataids);
+        if(dataids!=null&&!dataids.equals("")){
+            movieid = dataids;
+        }else{
 
-        movieid = dataids;
-
+        }
         HashMap<String, String> map = new HashMap<String, String>();
         map.put("mediaId", dataids);
 
