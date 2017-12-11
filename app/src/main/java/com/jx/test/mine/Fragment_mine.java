@@ -217,7 +217,7 @@ public class Fragment_mine extends Fragment {
 
     public void getData(List<HistroyBean> list) {
         idlist.clear();
-        Log.d("myMain", "==" + list.get(0).getMoviename());
+        //Log.d("myMain", "==" + list.get(0).getMoviename());
         int j = 0;
 
         for (int i = list.size() - 1; i > 0; i--) {
