@@ -95,8 +95,4 @@ dependencies {
     //xban
     compile 'com.xhb:xbanner:1.2.2'
 
-
-
-
-
 }

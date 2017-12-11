@@ -12,8 +12,8 @@
         android:scaleType="centerInside"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"
-        fresco:roundingBorderWidth="4dp"
-         fresco:roundingBorderColor="#90EEEEEE"
+        android:padding="5dp"
+        android:background="@drawable/shape_gray_square_bg"
         android:id="@+id/sim"/>
     <TextView
         android:layout_width="220dp"
