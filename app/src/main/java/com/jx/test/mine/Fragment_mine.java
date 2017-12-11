@@ -216,6 +216,9 @@ public class Fragment_mine extends Fragment {
     }
 
     public void getData(List<HistroyBean> list) {
+        h1.setVisibility(View.GONE);
+        h2.setVisibility(View.GONE);
+        h3.setVisibility(View.GONE);
         idlist.clear();
         //Log.d("myMain", "==" + list.get(0).getMoviename());
         int j = 0;
