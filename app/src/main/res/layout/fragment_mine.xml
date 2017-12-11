@@ -31,7 +31,7 @@
             android:id="@+id/historymore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:layout_margin="15dp">
+           android:layout_margin="13dp">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -47,7 +47,8 @@
                 android:layout_weight="3"
                 android:gravity="center_vertical"
                 android:text="历史"
-                android:textSize="20sp" />
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -135,40 +136,13 @@
             <include layout="@layout/lines_view" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/loadmore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-           android:layout_margin="15dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@mipmap/ic_action_download" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center_vertical"
-                android:text="缓存"
-                android:textSize="20sp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:padding="2dp"
-                app:srcCompat="@mipmap/right" />
-        </LinearLayout>
         <include layout="@layout/lines_view"/>
 
         <LinearLayout
             android:id="@+id/save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:layout_margin="15dp">
+           android:layout_margin="13dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -182,7 +156,8 @@
                 android:layout_weight="3"
                 android:gravity="center_vertical"
                 android:text="收藏"
-                android:textSize="20sp" />
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -196,7 +171,7 @@
             android:id="@+id/themmore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:layout_margin="15dp">
+           android:layout_margin="13dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -210,7 +185,8 @@
                 android:layout_weight="3"
                 android:gravity="center_vertical"
                 android:text="主题"
-                android:textSize="20sp" />
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -224,7 +200,7 @@
             android:id="@+id/loginlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp">
+            android:layout_margin="13dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -238,7 +214,8 @@
                 android:layout_weight="3"
                 android:gravity="center_vertical"
                 android:text="登录"
-                android:textSize="20sp" />
+                android:textColor="#fff"
+                android:textSize="18sp" />
 
 
             <ImageView

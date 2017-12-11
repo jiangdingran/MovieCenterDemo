@@ -12,6 +12,7 @@ import android.view.WindowManager;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.jx.test.utils.LogUtils;
+import com.zhy.changeskin.SkinManager;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -49,6 +50,7 @@ public abstract class BaseActivity extends me.yokeyword.fragmentation.SupportAct
         setTranslucentStatus(true);
         init();
 
+
     }
 
     //加载布局
@@ -60,6 +62,7 @@ public abstract class BaseActivity extends me.yokeyword.fragmentation.SupportAct
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         Log.d("onDestroy",  this.getClass().getName() + "------>onDestroy");
         //解除绑定
         if (mUnBinder != null)

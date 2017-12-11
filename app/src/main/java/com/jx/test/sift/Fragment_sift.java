@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,17 +45,28 @@ import butterknife.Unbinder;
 
 public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout.OnRefreshListener {
     Unbinder unbinder;
-
-    @BindView(R.id.id_swipe)
-    SwipeRefreshLayout idSwipe;
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.gobackLayout)
+    LinearLayout gobackLayout;
+    @BindView(R.id.title_bar_name)
+    TextView titleBarName;
+    @BindView(R.id.settv)
+    TextView settv;
+    @BindView(R.id.title_bar_layout)
+    LinearLayout titleBarLayout;
     @BindView(R.id.sift_xr)
     XRecyclerView siftXr;
-    private TextView line;
+    @BindView(R.id.id_swipe)
+    SwipeRefreshLayout idSwipe;
+
+
     private HomeAdapter adapter;
     private int imageHeight = 100; //设置渐变高度，一般为导航图片高度，自己控制
     private Mpresenter mpresenter;
     private XBanner mybanner;
     private TextView edit_sou;
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
@@ -62,10 +74,11 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
 
         View view = inflater.inflate(R.layout.fragment_sift, null);
         unbinder = ButterKnife.bind(this, view);
+        goback.setVisibility(View.GONE);
+        settv.setVisibility(View.GONE);
         View abnv = View.inflate(getActivity(), R.layout.layout_bann, null);
-        line=(TextView)view.findViewById(R.id.line);
-        mybanner=(XBanner)abnv.findViewById(R.id.mybanner);
-        edit_sou=(TextView)abnv.findViewById(R.id.edit_sou);
+        mybanner = (XBanner) abnv.findViewById(R.id.mybanner);
+        edit_sou = (TextView) abnv.findViewById(R.id.edit_sou);
         edit_sou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +86,7 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
             }
         });
         //搜索框在布局最上面
-        line.bringToFront();
+        titleBarLayout.bringToFront();
         //滑动监听
         siftXr.addHeaderView(abnv);
         siftXr.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -83,20 +96,20 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 y += dy;
                 if (y <= 0) {
-                    line.setText("精选");
-                    line.setBackgroundColor(Color.argb((int) 0, 227, 29, 26));//AGB由相关工具获得，或者美工提供
-                    line.setTextColor(Color.argb(0, 255, 255, 255));
+                    titleBarName.setText("精选");
+                    titleBarLayout.getBackground().setAlpha(0);
+                    titleBarName.setTextColor(Color.argb(0, 255, 255, 255));
                 } else if (y > 0 && y <= imageHeight) {
                     float scale = (float) y / imageHeight;
                     float alpha = (255 * scale);
                     // 只是layout背景透明
-                    line.setText("精选");
-                    line.setBackgroundColor(Color.argb((int) alpha, 227, 29, 26));
-                    line.setTextColor(Color.argb((int) alpha, 255, 255, 255));
+                    titleBarName.setText("精选");
+                    titleBarLayout.getBackground().setAlpha((int) alpha);
+                    titleBarName.setTextColor(Color.argb((int) alpha, 255, 255, 255));
                 } else {
-                    line.setText("精选");
-                    line.setBackgroundColor(Color.argb((int) 255, 227, 29, 26));
-                    line.setTextColor(Color.argb((int) 225, 255, 255, 255));
+                    titleBarName.setText("精选");
+                    titleBarLayout.getBackground().setAlpha(255);
+                    titleBarName.setTextColor(Color.argb((int) 225, 255, 255, 255));
                 }
 
             }

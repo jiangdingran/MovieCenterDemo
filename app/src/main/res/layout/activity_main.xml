@@ -8,7 +8,8 @@
 
     <RelativeLayout
         android:id="@+id/chbg"
-        android:background="@mipmap/bg"
+        android:background="@drawable/skin_img_default"
+        android:tag="skin:skin_img:background"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

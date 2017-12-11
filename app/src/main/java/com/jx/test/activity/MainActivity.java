@@ -46,6 +46,7 @@ import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
+import com.zhy.changeskin.SkinManager;
 
 import java.util.List;
 import java.util.Map;
@@ -282,10 +283,8 @@ public class MainActivity extends BaseActivity {
                 builder.create().show();
                 break;
             case R.id.zt:
-                int[] colors = new int[]{Color.YELLOW, Color.BLACK, Color.BLUE, Color.GRAY,
-                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
-                        Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
-                        Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
+                int[] colors = new int[]{Color.YELLOW, Color.BLUE,
+                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA};
                 ColorPickerDialog dialog =
                         // Constructor,the first argv is Context,second one is the colors you want to add
                         new ColorPickerDialog(MainActivity.this, colors)
@@ -293,7 +292,26 @@ public class MainActivity extends BaseActivity {
                                     @Override
                                     public void onColorChanged(int newColor) {
                                         // do something here
-                                        chbg.setBackgroundColor(newColor);
+                                        String endName = "";
+                                        Toast.makeText(MainActivity.this, "Color " + newColor, Toast.LENGTH_SHORT).show();
+                                        if (newColor == -256) {
+                                            endName = "default";
+                                        } else if (newColor == -16776961) {
+                                            endName = "blueone";
+                                        } else if (newColor == -16711936) {
+                                            endName = "green";
+                                        } else if (newColor == -16711681) {
+                                            endName = "bluetwo";
+                                        } else if (newColor == -65536) {
+                                            endName = "red";
+                                        } else if (newColor == -12303292) {
+                                            endName = "grayone";
+                                        } else if (newColor == -3355444) {
+                                            endName = "graytwo";
+                                        } else if (newColor == -65281) {
+                                            endName = "pink";
+                                        }
+                                        SkinManager.getInstance().changeSkin(endName);
                                     }
                                 })
                                 .build()
@@ -381,5 +399,12 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+        SkinManager.getInstance().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SkinManager.getInstance().unregister(this);
     }
 }

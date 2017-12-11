@@ -7,6 +7,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.umeng.socialize.PlatformConfig;
 import com.umeng.socialize.UMShareAPI;
+import com.zhy.changeskin.SkinManager;
 
 
 /**
@@ -30,7 +31,8 @@ public class MyApp extends Application {
         Fresco.initialize(this);
         ImageLoaderConfiguration aDefault = ImageLoaderConfiguration.createDefault(getApplicationContext());
         ImageLoader.getInstance().init(aDefault);
-
+        //皮肤
+        SkinManager.getInstance().init(this);
 
     }
     public static MyApp getInstance() {

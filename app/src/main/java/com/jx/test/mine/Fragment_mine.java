@@ -28,6 +28,7 @@ import com.jx.test.detail.ShiPActivity;
 import com.jx.test.find.greendao.HistroyBean;
 import com.jx.test.mine.utils.SharedPreferencesUtils;
 import com.jx.test.sift.bean.MyDataId;
+import com.zhy.changeskin.SkinManager;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -47,9 +48,32 @@ import butterknife.Unbinder;
 public class Fragment_mine extends Fragment {
 
     View view;
+
+    Unbinder unbinder;
+
+
+    ArrayList<LinearLayout> layoutlist;
+    @BindView(R.id.h1)
+    LinearLayout h1;
+    @BindView(R.id.h2)
+    LinearLayout h2;
+    @BindView(R.id.h3)
+    LinearLayout h3;
+
+    ArrayList<SimpleDraweeView> headlist;
+    ArrayList<TextView> namelist;
+
+    ArrayList<String> idlist;
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.gobackLayout)
+    LinearLayout gobackLayout;
     @BindView(R.id.title_bar_name)
     TextView titleBarName;
-
+    @BindView(R.id.settv)
+    TextView settv;
+    @BindView(R.id.title_bar_layout)
+    LinearLayout titleBarLayout;
     @BindView(R.id.my_bg_colorful)
     ImageView myBgColorful;
     @BindView(R.id.imageView2)
@@ -72,40 +96,16 @@ public class Fragment_mine extends Fragment {
     TextView historyThreeName;
     @BindView(R.id.history)
     LinearLayout history;
-    @BindView(R.id.loadmore)
-    LinearLayout loadmore;
     @BindView(R.id.save)
     LinearLayout save;
     @BindView(R.id.themmore)
     LinearLayout themmore;
+    @BindView(R.id.loginlayout)
+    LinearLayout loginlayout;
     @BindView(R.id.content_mine)
     LinearLayout contentMine;
     @BindView(R.id.mine_set)
     ImageView mineSet;
-    Unbinder unbinder;
-    @BindView(R.id.goback)
-    ImageView goback;
-    @BindView(R.id.settv)
-    TextView settv;
-    @BindView(R.id.title_bar_layout)
-    LinearLayout titleBarLayout;
-    @BindView(R.id.gobackLayout)
-    LinearLayout gobackLayout;
-    @BindView(R.id.loginlayout)
-    LinearLayout loginlayout;
-
-    ArrayList<LinearLayout> layoutlist;
-    @BindView(R.id.h1)
-    LinearLayout h1;
-    @BindView(R.id.h2)
-    LinearLayout h2;
-    @BindView(R.id.h3)
-    LinearLayout h3;
-
-    ArrayList<SimpleDraweeView> headlist;
-    ArrayList<TextView> namelist;
-
-    ArrayList<String> idlist;
 
     @Nullable
     @Override
@@ -135,6 +135,7 @@ public class Fragment_mine extends Fragment {
         h1.setVisibility(View.GONE);
         h2.setVisibility(View.GONE);
         h3.setVisibility(View.GONE);
+        SkinManager.getInstance().register(getActivity());
         return view;
     }
 
@@ -145,23 +146,19 @@ public class Fragment_mine extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.historymore, R.id.loadmore, R.id.save, R.id.themmore, R.id.mine_set, R.id.loginlayout,R.id.h1, R.id.h2, R.id.h3})
+    @OnClick({R.id.historymore,R.id.save, R.id.themmore, R.id.mine_set, R.id.loginlayout, R.id.h1, R.id.h2, R.id.h3})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.historymore:
                 Intent intenthistroy = new Intent(getActivity(), HistroyActivity.class);
                 startActivity(intenthistroy);
                 break;
-            case R.id.loadmore:
-                break;
             case R.id.save:
                 startActivity(new Intent(getContext(), SaveActivity.class));
                 break;
             case R.id.themmore:
-                int[] colors = new int[]{Color.YELLOW, Color.BLACK, Color.BLUE, Color.GRAY,
-                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA,
-                        Color.rgb(100, 22, 33), Color.rgb(82, 182, 2), Color.rgb(122, 32, 12), Color.rgb(82, 12, 2),
-                        Color.rgb(89, 23, 200), Color.rgb(13, 222, 23)};
+                int[] colors = new int[]{Color.YELLOW, Color.BLUE,
+                        Color.GREEN, Color.CYAN, Color.RED, Color.DKGRAY, Color.LTGRAY, Color.MAGENTA};
                 ColorPickerDialog dialog =
                         // Constructor,the first argv is Context,second one is the colors you want to add
                         new ColorPickerDialog(getActivity(), colors)
@@ -169,8 +166,26 @@ public class Fragment_mine extends Fragment {
                                     @Override
                                     public void onColorChanged(int newColor) {
                                         // do something here
+                                        String endName = "";
                                         Toast.makeText(getActivity(), "Color " + newColor, Toast.LENGTH_SHORT).show();
-                                        titleBarLayout.setBackgroundColor(newColor);
+                                        if (newColor == -256) {
+                                            endName = "default";
+                                        } else if (newColor == -16776961) {
+                                            endName = "blueone";
+                                        } else if (newColor == -16711936) {
+                                            endName = "green";
+                                        } else if (newColor == -16711681) {
+                                            endName = "bluetwo";
+                                        } else if (newColor == -65536) {
+                                            endName = "red";
+                                        } else if (newColor == -12303292) {
+                                            endName = "grayone";
+                                        } else if (newColor == -3355444) {
+                                            endName = "graytwo";
+                                        } else if (newColor == -65281) {
+                                            endName = "pink";
+                                        }
+                                        SkinManager.getInstance().changeSkin(endName);
                                     }
                                 })
                                 .build()
@@ -242,4 +257,9 @@ public class Fragment_mine extends Fragment {
 
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SkinManager.getInstance().unregister(getActivity());
+    }
 }

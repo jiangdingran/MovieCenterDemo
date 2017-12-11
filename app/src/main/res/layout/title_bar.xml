@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="#e66844"
+    android:background="@drawable/skin_img_default"
+    android:tag="skin:skin_img:background"
     android:orientation="vertical">
 
     <View
