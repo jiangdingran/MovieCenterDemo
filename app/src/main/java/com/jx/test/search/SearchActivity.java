@@ -125,12 +125,27 @@ public class SearchActivity extends AppCompatActivity implements SearView {
         int flag=0;
         switch (view.getId()) {
             case R.id.seartv:
-                HashMap<String, String> map = new HashMap<>();
-                String s = shuru.getText().toString();
-                map.put("keyword", s);
-                persent.setSeardata("getVideoListByKeyWord.do", map);
-                RecodBean recodBean = new RecodBean(null,s);
-                userDao.insert(recodBean);
+                String s1 = seartv.getText().toString();
+                if (s1.equals("搜索")){
+                    HashMap<String, String> map = new HashMap<>();
+                    String s = shuru.getText().toString();
+                    map.put("keyword", s);
+                    persent.setSeardata("getVideoListByKeyWord.do", map);
+                    for (int i=0;i<recodBeans.size();i++){
+                        String searid = recodBeans.get(i).getSearid();
+                        if (searid.equals(s)){
+                            flag=1;
+                        }else {
+                            flag=0;
+                        }
+                    }
+                    if (flag==0){
+                        RecodBean recodBean = new RecodBean(null,s);
+                        userDao.insert(recodBean);
+                    }
+                }else{
+                      finish();
+                }
                 break;
             case R.id.clea:
                 userDao.deleteAll();
