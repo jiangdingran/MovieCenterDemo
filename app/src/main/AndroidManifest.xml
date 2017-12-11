@@ -46,8 +46,6 @@
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".detail.ShiPActivity" />
 
-
-
         <!-- 微信  start -->
         //这个是自己创建的见本文最后详解
         <activity
@@ -63,7 +61,7 @@
             android:configChanges="keyboardHidden|orientation"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name="com.sina.weibo.sdk.share.WbShareTransActivity"
             android:launchMode="singleTask"
@@ -97,12 +95,11 @@
 
         <meta-data
             android:name="UMENG_APPKEY"
-
             android:value="5a28de35f43e482e15000055" />
 
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.MeActivity"></activity>
-
+        <activity android:name=".activity.MeActivity" />
+        <activity android:name=".activity.HistroyActivity"></activity>
     </application>
 
 </manifest>

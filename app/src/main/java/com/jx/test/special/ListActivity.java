@@ -5,6 +5,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jx.test.R;
@@ -21,6 +22,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ListActivity extends AppCompatActivity implements Sview {
 
@@ -32,6 +34,8 @@ public class ListActivity extends AppCompatActivity implements Sview {
     TextView titleBarName;
     @BindView(R.id.settv)
     TextView settv;
+    @BindView(R.id.goback)
+    ImageView goback;
     private Mypresent mypresent;
     private GridAdapter adapter;
     private int pos;
@@ -60,5 +64,10 @@ public class ListActivity extends AppCompatActivity implements Sview {
         List<SpecialBean.RetBean.ListBean.ChildListBean> childList = list.get(pos).getChildList();
         adapter = new GridAdapter(childList, ListActivity.this);
         gv.setAdapter(adapter);
+    }
+
+    @OnClick(R.id.goback)
+    public void onViewClicked() {
+        ListActivity.this.finish();
     }
 }

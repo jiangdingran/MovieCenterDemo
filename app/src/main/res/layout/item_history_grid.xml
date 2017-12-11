@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:padding="5dp"
     xmlns:fresco="http://schemas.android.com/apk/res-auto">
-
-
-
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/collect_head"
+        android:id="@+id/history_head"
         android:layout_width="80dp"
         android:layout_height="110dp"
         fresco:actualImageScaleType="centerCrop"
@@ -18,10 +14,10 @@
         fresco:roundingBorderWidth="5dp" />
     <TextView
         android:gravity="center"
-        android:layout_below="@+id/collect_head"
+        android:layout_below="@+id/history_head"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:id="@+id/collect_name"
+        android:id="@+id/history_name"
         android:text="名字"
         />
 </RelativeLayout>
