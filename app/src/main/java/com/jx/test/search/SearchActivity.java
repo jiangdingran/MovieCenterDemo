@@ -81,7 +81,7 @@ public class SearchActivity extends AppCompatActivity implements SearView {
         //UserDao接受
         userDao = daoSession.getRecodBeanDao();
         recodBeans = userDao.loadAll();
-        rser.setLayoutManager(new GridLayoutManager(SearchActivity.this,3));
+        rser.setLayoutManager(new GridLayoutManager(SearchActivity.this,6));
         recodAdapter=new RecodAdapter(recodBeans,SearchActivity.this);
         if (recodAdapter!=null){
             rser.setAdapter(recodAdapter);

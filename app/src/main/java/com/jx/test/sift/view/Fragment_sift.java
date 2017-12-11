@@ -157,9 +157,10 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
         mybanner.setData(xbanimg, null);
         mybanner.setmAdapter(new XBanner.XBannerAdapter() {
             @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
+            public void loadBanner(XBanner banner, View view, int position) {
                 Glide.with(getActivity()).load(xbanimg.get(position)).into((ImageView) view);
             }
+
         });
         mybanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
             @Override
