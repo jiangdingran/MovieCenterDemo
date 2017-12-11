@@ -1,6 +1,7 @@
 package com.jx.test.search.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,7 +9,11 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jx.test.R;
+import com.jx.test.detail.ShiPActivity;
 import com.jx.test.search.bean.SearchBean;
+import com.jx.test.sift.bean.MyDataId;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -41,7 +46,7 @@ public class SearAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder=null;
         if (view==null){
             view=View.inflate(context, R.layout.layout_grid_item,null);
@@ -54,6 +59,14 @@ public class SearAdapter extends BaseAdapter {
         }
         holder.simpleDraweeView.setImageURI(list.get(i).getPic());
         holder.textView.setText(list.get(i).getTitle());
+        holder.simpleDraweeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String dataId = list.get(i).getDataId();
+                EventBus.getDefault().postSticky(new MyDataId(dataId));
+                context.startActivity(new Intent(context, ShiPActivity.class));
+            }
+        });
         return view;
     }
     class ViewHolder{

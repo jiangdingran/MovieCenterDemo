@@ -16,7 +16,7 @@
     android:background="@color/colorDeepOrangePrimary"
     >
     <EditText
-        android:layout_width="320dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:id="@+id/shuru"
@@ -66,10 +66,10 @@
         android:layout_height="wrap_content"
         android:textColor="#fff"
         android:text="热门推荐"/>
-        <android.support.v7.widget.RecyclerView
+        <GridView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rmsre"></android.support.v7.widget.RecyclerView>
+            android:id="@+id/rmsre"></GridView>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
