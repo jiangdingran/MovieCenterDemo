@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fk_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="反馈"
+        android:textSize="25dp"
+        android:background="#f0efef"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/edit_yx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="邮箱地址..."/>
+
+    <EditText
+        android:id="@+id/edit_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="语音内容..."/>
+
+    <Button
+        android:id="@+id/btn_yy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="点击录音"
+        android:background="#f0efef"/>
+
+</LinearLayout>
