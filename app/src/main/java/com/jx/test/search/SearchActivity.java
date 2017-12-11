@@ -2,6 +2,7 @@ package com.jx.test.search;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,12 +13,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.jx.test.R;
-import com.jx.test.search.adapter.JlunAdapter;
+import com.jx.test.find.greendao.gen.DaoMaster;
+import com.jx.test.find.greendao.gen.DaoSession;
+import com.jx.test.find.greendao.gen.RecodBeanDao;
+import com.jx.test.search.adapter.ReclistAdapter;
+import com.jx.test.search.adapter.RecodAdapter;
 import com.jx.test.search.adapter.SearAdapter;
+import com.jx.test.search.bean.RecodBean;
 import com.jx.test.search.bean.SearchBean;
+import com.jx.test.search.bean.TestBean;
 import com.jx.test.search.present.SearPersent;
 import com.jx.test.search.view.SearView;
 import com.jx.test.utils.LogUtils;
@@ -39,7 +45,7 @@ public class SearchActivity extends AppCompatActivity implements SearView {
     @BindView(R.id.rser)
     RecyclerView rser;
     @BindView(R.id.rmsre)
-    RecyclerView rmsre;
+    GridView rmsre;
     @BindView(R.id.sgr)
     GridView sgr;
     @BindView(R.id.lear)
@@ -52,8 +58,10 @@ public class SearchActivity extends AppCompatActivity implements SearView {
     LinearLayout jl;
     private SearPersent persent;
     private SearAdapter adapter;
-    private ArrayList<String> strings;
-    private JlunAdapter jlunAdapter;
+    private RecodAdapter recodAdapter;
+    private ReclistAdapter reclistAdapter;
+    RecodBeanDao userDao;
+    private List<RecodBean> recodBeans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +69,32 @@ public class SearchActivity extends AppCompatActivity implements SearView {
         setContentView(R.layout.activity_search);
         ButterKnife.bind(this);
         persent = new SearPersent(this);
-        strings = new ArrayList<>();
+        ArrayList<TestBean> list = new ArrayList<>();
+        list.add(new TestBean("https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2036166846,300012129&fm=27&gp=0.jpg","模拟111"));
+        list.add(new TestBean("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=184313215,176252173&fm=27&gp=0.jpg","模拟222"));
+        reclistAdapter = new ReclistAdapter(list,SearchActivity.this);
+        rmsre.setAdapter(reclistAdapter);
+        //初始化管理的包（后面new的OpenHelper包）
+        DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
+        DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
+        DaoSession daoSession = daoMaster.newSession();
+        //UserDao接受
+        userDao = daoSession.getRecodBeanDao();
+        recodBeans = userDao.loadAll();
+        rser.setLayoutManager(new GridLayoutManager(SearchActivity.this,3));
+        recodAdapter=new RecodAdapter(recodBeans,SearchActivity.this);
+        if (recodAdapter!=null){
+            rser.setAdapter(recodAdapter);
+        }
+        recodAdapter.setClickFinsh(new RecodAdapter.ClickFinsh() {
+            @Override
+            public void itemclick(TextView v, int position) {
+                String s = v.getText().toString().trim();
+                HashMap<String, String> map = new HashMap<>();
+                map.put("keyword", s);
+                persent.setSeardata("getVideoListByKeyWord.do", map);
+            }
+        });
         shuru.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -92,13 +125,17 @@ public class SearchActivity extends AppCompatActivity implements SearView {
         int flag=0;
         switch (view.getId()) {
             case R.id.seartv:
-                LogUtils.d("onclick", "aa");
                 HashMap<String, String> map = new HashMap<>();
                 String s = shuru.getText().toString();
                 map.put("keyword", s);
                 persent.setSeardata("getVideoListByKeyWord.do", map);
+                RecodBean recodBean = new RecodBean(null,s);
+                userDao.insert(recodBean);
                 break;
             case R.id.clea:
+                userDao.deleteAll();
+                recodAdapter.notifyDataSetChanged();
+                recodBeans.clear();
                 break;
         }
     }
@@ -106,7 +143,6 @@ public class SearchActivity extends AppCompatActivity implements SearView {
     @Override
     public void getSearView(List<SearchBean.RetBean.ListBean> list) {
         adapter = new SearAdapter(list, SearchActivity.this);
-        Toast.makeText(SearchActivity.this,""+list.size(),Toast.LENGTH_LONG).show();
         sgr.setAdapter(adapter);
         if (adapter != null) {
             jl.setVisibility(View.GONE);
