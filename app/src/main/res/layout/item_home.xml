@@ -4,15 +4,17 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/item_simp"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:src="@mipmap/default_320"
         android:layout_centerHorizontal="true"
         android:background="@drawable/shape_gray_square_bg"
-        android:padding="5dp"
-        android:scaleType="fitXY"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="3dp"
+        android:padding="5dp" />
     <TextView
         android:id="@+id/item_text1"
         android:layout_width="match_parent"
@@ -20,7 +22,8 @@
         android:gravity="center"
         android:layout_below="@id/item_simp"
         android:text="哈哈哈"
-        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textSize="16dp"
         android:layout_marginTop="5dp"
         />
 </RelativeLayout>
