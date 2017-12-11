@@ -29,6 +29,7 @@ import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.presenter.Mpresenter;
 import com.jx.test.sift.view.Iview;
 import com.stx.xhb.xbanner.XBanner;
+import com.stx.xhb.xbanner.transformers.Transformer;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -157,9 +158,14 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
             }
         }
         mybanner.setData(xbanimg, null);
+//        mybanner.setmAutoPalyTime(2500);
+        // 设置XBanner的页面切换特效
+        mybanner.setPageTransformer(Transformer.Depth);
+        // 设置XBanner页面切换的时间，即动画时长
+        mybanner.setPageChangeDuration(1000);
         mybanner.setmAdapter(new XBanner.XBannerAdapter() {
             @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
+            public void loadBanner(XBanner banner, View view, int position) {
                 Glide.with(getActivity()).load(xbanimg.get(position)).into((ImageView) view);
             }
         });
