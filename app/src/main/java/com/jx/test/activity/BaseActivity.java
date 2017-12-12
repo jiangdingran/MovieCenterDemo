@@ -49,7 +49,7 @@ public abstract class BaseActivity extends me.yokeyword.fragmentation.SupportAct
         LogUtils.e("BaseActivity", this.getClass().getSimpleName());
         setTranslucentStatus(true);
         init();
-
+        SkinManager.getInstance().register(this);
 
     }
 
@@ -60,9 +60,15 @@ public abstract class BaseActivity extends me.yokeyword.fragmentation.SupportAct
 
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        SkinManager.getInstance().register(this);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        SkinManager.getInstance().unregister(this);
         Log.d("onDestroy",  this.getClass().getName() + "------>onDestroy");
         //解除绑定
         if (mUnBinder != null)

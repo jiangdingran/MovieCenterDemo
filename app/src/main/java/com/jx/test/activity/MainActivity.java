@@ -399,12 +399,11 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
-        SkinManager.getInstance().register(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        SkinManager.getInstance().unregister(this);
+
     }
 }
