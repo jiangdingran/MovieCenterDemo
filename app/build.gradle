@@ -111,6 +111,8 @@ dependencies {
     implementation files('libs/Msc.jar')
     //xban
     compile 'com.xhb:xbanner:1.2.2'
+
     compile project(path: ':changeskin_lib')
+
     implementation project(':changeskin_lib')
 }

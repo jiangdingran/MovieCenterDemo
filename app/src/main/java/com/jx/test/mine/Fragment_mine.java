@@ -144,6 +144,7 @@ public class Fragment_mine extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+
     }
 
     @OnClick({R.id.historymore,R.id.save, R.id.themmore, R.id.mine_set, R.id.loginlayout, R.id.h1, R.id.h2, R.id.h3})

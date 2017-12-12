@@ -2,12 +2,13 @@ package com.jx.test.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.jx.test.R;
 import com.jx.test.detail.ShiPActivity;
@@ -26,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HistroyActivity extends AppCompatActivity {
+public class HistroyActivity extends BaseActivity {
 
 
     HistroyBeanDao userDao;
@@ -35,16 +36,25 @@ public class HistroyActivity extends AppCompatActivity {
     GridView gridView;
 
     HistoryGridAdapter adapter;
-    @BindView(R.id.history_clear)
-    Button historyClear;
+    @BindView(R.id.goback)
+    ImageView goback;
+    @BindView(R.id.gobackLayout)
+    LinearLayout gobackLayout;
+    @BindView(R.id.title_bar_name)
+    TextView titleBarName;
+    @BindView(R.id.settv)
+    TextView settv;
+    @BindView(R.id.title_bar_layout)
+    LinearLayout titleBarLayout;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_histroy);
-        ButterKnife.bind(this);
+    protected int getRootView() {
+        return R.layout.activity_histroy;
+    }
 
-
+    @Override
+    protected void init() {
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
         DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());
         DaoSession daoSession = daoMaster.newSession();
@@ -52,7 +62,6 @@ public class HistroyActivity extends AppCompatActivity {
         userDao = daoSession.getHistroyBeanDao();
 
         initData();
-
     }
 
     public void initData() {
@@ -78,13 +87,21 @@ public class HistroyActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.history_clear)
-    public void onViewClicked() {
-        for(int i = 0 ; i < list.size();i++){
-            userDao.delete(list.get(i));
-        }
 
-        list.clear();
-        adapter.notifyDataSetChanged();
+    @OnClick({R.id.goback, R.id.settv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.goback:
+                finish();
+                break;
+            case R.id.settv:
+                for (int i = 0; i < list.size(); i++) {
+                    userDao.delete(list.get(i));
+                }
+
+                list.clear();
+                adapter.notifyDataSetChanged();
+                break;
+        }
     }
 }
