@@ -31,14 +31,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'x86', 'x86_64', 'armeabi-v7a', 'armeabi'
-            universalApk false
-        }
-    }
+
 
 
     buildTypes {
@@ -111,8 +104,29 @@ dependencies {
     implementation files('libs/Msc.jar')
     //xban
     compile 'com.xhb:xbanner:1.2.2'
-
     compile project(path: ':changeskin_lib')
-
     implementation project(':changeskin_lib')
+    implementation project(':jiaozivideoplayer')
+
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+
+
+
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+
+
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
 }

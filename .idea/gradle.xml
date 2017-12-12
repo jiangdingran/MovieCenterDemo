@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/changeskin_lib" />
             <option value="$PROJECT_DIR$/gsyVideoPlayer" />
+            <option value="$PROJECT_DIR$/jiaozivideoplayer" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
