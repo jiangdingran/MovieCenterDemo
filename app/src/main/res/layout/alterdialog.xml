@@ -36,5 +36,10 @@
         android:layout_height="wrap_content"
         android:text="点击录音"
         android:background="#f0efef"/>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/sb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
