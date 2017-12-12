@@ -128,7 +128,7 @@ public class MainActivity extends BaseActivity {
     List<HistroyBean> list;
     HistroyBeanDao userDao;
     private Button button,Byy;
-    private TextView tv_title;
+    private TextView tv_title,tv_sb;
     private EditText edit_yx,edit_content;
     private HashMap<String, String> mIatResults = new LinkedHashMap<String , String>();    // 用HashMap存储听写结果
     private static final String TAG = MainActivity.class .getSimpleName();
@@ -292,9 +292,15 @@ public class MainActivity extends BaseActivity {
                 //实例化布局
                 view = LayoutInflater.from(MainActivity.this).inflate(R.layout.alterdialog,null);
                 //初始化控件
+                tv_sb = (TextView) view.findViewById(R.id.sb);
                 Byy = (Button) view.findViewById(R.id.btn_yy);
                 edit_yx = (EditText) view.findViewById(R.id.edit_yx);
                 edit_content = (EditText) view.findViewById(R.id.edit_content);
+                // 设备厂商
+                String brand = Build.BRAND;
+                // 设备名称
+                String model = Build.MODEL;
+                tv_sb.setText("设备详情:" + brand + " "+ model);
                 //点击调用语音识别
                 Byy.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -327,7 +333,7 @@ public class MainActivity extends BaseActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);//当前环境
                 builder.setIcon(R.mipmap.ic_action_users2);//提示图标
                 builder.setTitle("关于我们");//提示框标题
-                builder.setMessage("点开并没有什么" + "\n" + "但请记住,我们是:景行工作室");//提示内容
+                builder.setMessage("点开并没有什么" + "\n" + "但请记住,我们是:火锅工作室");//提示内容
                 builder.setNegativeButton("关闭", null);//关闭按钮
                 builder.create().show();
                 break;
