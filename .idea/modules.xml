@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MovieCenterDemo.iml" filepath="$PROJECT_DIR$/MovieCenterDemo.iml" />
-      <module fileurl="file://E:\Github\g\MovieCenterDemo\MovieCenterDemo.iml" filepath="E:\Github\g\MovieCenterDemo\MovieCenterDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../g/MovieCenterDemo/MovieCenterDemo.iml" filepath="$PROJECT_DIR$/../../g/MovieCenterDemo/MovieCenterDemo.iml" />
+      <module fileurl="file://E:\Github\gc\MovieCenterDemo\MovieCenterDemo.iml" filepath="E:\Github\gc\MovieCenterDemo\MovieCenterDemo.iml" />
       <module fileurl="file://D:\android_project_code\MovieCenterDemo\MovieCenterDemo.iml" filepath="D:\android_project_code\MovieCenterDemo\MovieCenterDemo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://E:\Github\g\MovieCenterDemo\app\app.iml" filepath="E:\Github\g\MovieCenterDemo\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../g/MovieCenterDemo/app/app.iml" filepath="$PROJECT_DIR$/../../g/MovieCenterDemo/app/app.iml" />
+      <module fileurl="file://E:\Github\gc\MovieCenterDemo\app\app.iml" filepath="E:\Github\gc\MovieCenterDemo\app\app.iml" />
       <module fileurl="file://E:\Github\gongch\MovieCenterDemo\app\app.iml" filepath="E:\Github\gongch\MovieCenterDemo\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/changeskin_lib/changeskin_lib.iml" filepath="$PROJECT_DIR$/changeskin_lib/changeskin_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gsyVideoPlayer/gsyVideoPlayer.iml" filepath="$PROJECT_DIR$/gsyVideoPlayer/gsyVideoPlayer.iml" />
     </modules>
   </component>
 </project>

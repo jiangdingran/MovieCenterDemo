@@ -108,11 +108,9 @@ dependencies {
     implementation files('libs/umeng_social_net.jar')
     implementation files('libs/umeng_social_tool.jar')
     compile 'org.greenrobot:greendao:3.2.0'
-
     implementation files('libs/Msc.jar')
-
     //xban
     compile 'com.xhb:xbanner:1.2.2'
-
     compile project(path: ':changeskin_lib')
+    implementation project(':changeskin_lib')
 }

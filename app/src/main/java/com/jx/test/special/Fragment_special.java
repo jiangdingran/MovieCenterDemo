@@ -51,7 +51,7 @@ public class Fragment_special extends Fragment implements Sview {
         unbinder = ButterKnife.bind(this, view);
         titleBarName.setText("专题");
         settv.setVisibility(View.INVISIBLE);
-        goback.setVisibility(View.GONE);
+        goback.setVisibility(View.INVISIBLE);
         return view;
     }
 

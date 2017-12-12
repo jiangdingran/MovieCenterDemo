@@ -10,7 +10,7 @@
         android:layout_margin="8dp"
         android:padding="5dp"
         fresco:placeholderImage="@mipmap/default_200"
-        fresco:placeholderImageScaleType="fitCenter"
+        fresco:placeholderImageScaleType="centerCrop"
         android:background="@drawable/shape_gray_square_bg"
     android:id="@+id/img"/>
     <TextView
