@@ -9,6 +9,8 @@
         android:layout_height="150dp"
         android:layout_marginLeft="12dp"
         android:padding="5dp"
+        fresco:placeholderImage="@mipmap/default_200"
+        fresco:placeholderImageScaleType="centerCrop"
         android:background="@drawable/shape_gray_square_bg"
     android:id="@+id/simg"/>
     <TextView

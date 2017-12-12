@@ -1,2 +1,1 @@
-include ':app'
-include ':changeskin_lib'
+include ':app', ':changeskin_lib', ':gsyVideoPlayer'

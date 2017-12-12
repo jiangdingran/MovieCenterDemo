@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -65,7 +64,6 @@ public class HomeAdapter extends XRecyclerView.Adapter<HomeAdapter.MyViewHolder>
                 @Override
                 public void onClick(View v) {
                     String dataId = mlist.get(4).getChildList().get(position).getDataId();
-                    Toast.makeText(mContext, dataId+"fragment", Toast.LENGTH_SHORT).show();
                     EventBus.getDefault().postSticky(new MyDataId(dataId));
                     mContext.startActivity(new Intent(mContext, ShiPActivity.class));
                 }

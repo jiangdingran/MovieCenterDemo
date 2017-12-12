@@ -8,7 +8,7 @@
         android:layout_width="220dp"
         android:layout_height="120dp"
         fresco:placeholderImage="@mipmap/default_320"
-        fresco:placeholderImageScaleType="fitCenter"
+        fresco:placeholderImageScaleType="centerCrop"
         android:scaleType="centerInside"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="12dp"

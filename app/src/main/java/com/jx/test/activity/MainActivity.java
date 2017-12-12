@@ -49,7 +49,11 @@ import com.jx.test.find.greendao.gen.HistroyBeanDao;
 import com.jx.test.mine.Fragment_mine;
 import com.jx.test.sift.view.Fragment_sift;
 import com.jx.test.special.Fragment_special;
+
+import com.jx.test.utils.NetUtils;
+
 import com.jx.test.utils.JsonParser;
+
 import com.jx.test.utils.ResideLayout;
 import com.jx.test.utils.XCRoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -140,6 +144,10 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void init() {
+        int netWorkType = NetUtils.getNetWorkType(MainActivity.this);
+        if (netWorkType==-1){
+            Toast.makeText(MainActivity.this, "网络没有连接哦~", Toast.LENGTH_SHORT).show();
+        }
         chbg.setBackgroundResource(R.mipmap.bg_colorful);
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(getApplicationContext(), "lenve.db", null);
         DaoMaster daoMaster = new DaoMaster(devOpenHelper.getWritableDb());

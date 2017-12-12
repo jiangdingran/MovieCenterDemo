@@ -27,7 +27,6 @@ import com.jx.test.sift.adapter.HomeAdapter;
 import com.jx.test.sift.bean.MyDataId;
 import com.jx.test.sift.bean.MyHome;
 import com.jx.test.sift.presenter.Mpresenter;
-import com.jx.test.sift.view.Iview;
 import com.stx.xhb.xbanner.XBanner;
 
 import org.greenrobot.eventbus.EventBus;
@@ -114,11 +113,12 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
 
             }
         });
-        init();
+        /*init();*/
         mpresenter = new Mpresenter(this);
         mpresenter.getHomedaTa();
         /*停止刷新图案*/
         idSwipe.setOnRefreshListener(this);
+        siftXr.setPullRefreshEnabled(false);
         return view;
     }
 
@@ -126,8 +126,6 @@ public class Fragment_sift extends Fragment implements Iview, SwipeRefreshLayout
         siftXr.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
             public void onRefresh() {
-                mpresenter.getHomedaTa();
-                adapter.notifyDataSetChanged();
                 siftXr.refreshComplete();
             }
 

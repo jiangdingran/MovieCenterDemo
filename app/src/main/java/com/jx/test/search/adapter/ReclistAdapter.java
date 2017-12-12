@@ -16,7 +16,9 @@ import java.util.ArrayList;
  * Created by admin on 2017/12/10.
  */
 
-public class ReclistAdapter extends BaseAdapter {
+public class
+
+ReclistAdapter extends BaseAdapter {
     ArrayList<TestBean> list;
     Context context;
 
