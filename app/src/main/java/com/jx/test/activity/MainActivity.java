@@ -3,6 +3,7 @@ package com.jx.test.activity;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -13,7 +14,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -24,6 +28,18 @@ import android.widget.Toast;
 
 import com.github.mummyding.colorpickerdialog.ColorPickerDialog;
 import com.github.mummyding.colorpickerdialog.OnColorChangedListener;
+import com.iflytek.cloud.ErrorCode;
+import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.RecognizerListener;
+import com.iflytek.cloud.RecognizerResult;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechRecognizer;
+import com.iflytek.cloud.SpeechSynthesizer;
+import com.iflytek.cloud.SpeechUtility;
+import com.iflytek.cloud.SynthesizerListener;
+import com.iflytek.cloud.ui.RecognizerDialog;
+import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.jx.test.R;
 import com.jx.test.find.Fragment_find;
 import com.jx.test.find.greendao.HistroyBean;
@@ -33,6 +49,7 @@ import com.jx.test.find.greendao.gen.HistroyBeanDao;
 import com.jx.test.mine.Fragment_mine;
 import com.jx.test.sift.view.Fragment_sift;
 import com.jx.test.special.Fragment_special;
+import com.jx.test.utils.JsonParser;
 import com.jx.test.utils.ResideLayout;
 import com.jx.test.utils.XCRoundImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -48,6 +65,11 @@ import com.umeng.socialize.shareboard.SnsPlatform;
 import com.umeng.socialize.utils.ShareBoardlistener;
 import com.zhy.changeskin.SkinManager;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -101,12 +123,15 @@ public class MainActivity extends BaseActivity {
     private Fragment_mine fragment_mine;
     private Fragment_sift fragment_sift;
     private Fragment_special fragment_special;
-
     FragmentManager fm;
     FragmentTransaction transaction;
-
     List<HistroyBean> list;
     HistroyBeanDao userDao;
+    private Button button,Byy;
+    private TextView tv_title;
+    private EditText edit_yx,edit_content;
+    private HashMap<String, String> mIatResults = new LinkedHashMap<String , String>();    // 用HashMap存储听写结果
+    private static final String TAG = MainActivity.class .getSimpleName();
 
     @Override
     protected int getRootView() {
@@ -170,6 +195,8 @@ public class MainActivity extends BaseActivity {
 
             }
         };
+        //调用语音
+        initSpeech() ;
     }
 
     @Override
@@ -243,8 +270,6 @@ public class MainActivity extends BaseActivity {
                         .build().list();
 
                 fragment_mine.getData(list);
-
-
                 break;
             case R.id.sc:
                 startActivity(new Intent(MainActivity.this, SaveActivity.class));
@@ -264,12 +289,36 @@ public class MainActivity extends BaseActivity {
                         .open();
                 break;
             case R.id.jyfk:
-                AlertDialog.Builder builder3 = new AlertDialog.Builder(MainActivity.this);//当前环境
-                builder3.setIcon(R.mipmap.ic_action_undo2);//提示图标
-                builder3.setTitle("建议反馈");//提示框标题
-                builder3.setMessage("对不起,建议反馈操作只针对VIP用户开放" + "\n" + "如果您想继续,请前往开通VIP"+ "\n" + "\n" + "还有...."+ "\n" + "我没有做开通VIP服务");//提示内容
-                builder3.setNegativeButton("关闭", null);//关闭按钮
-                builder3.create().show();
+                //实例化布局
+                view = LayoutInflater.from(MainActivity.this).inflate(R.layout.alterdialog,null);
+                //初始化控件
+                Byy = (Button) view.findViewById(R.id.btn_yy);
+                edit_yx = (EditText) view.findViewById(R.id.edit_yx);
+                edit_content = (EditText) view.findViewById(R.id.edit_content);
+                //点击调用语音识别
+                Byy.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startSpeechDialog();
+                    }
+                });
+                //创建对话框
+                AlertDialog dialog1 = new AlertDialog.Builder(MainActivity.this).create();
+                dialog1.setView(view);//添加布局
+                //设置按键
+                dialog1.setButton(AlertDialog.BUTTON_POSITIVE, "发送", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "已成功发送反馈", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog1.setButton(AlertDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "您已取消", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                dialog1.show();
                 break;
             case R.id.sz:
                 startActivity(new Intent(MainActivity.this, SetActivity.class));
@@ -402,9 +451,203 @@ public class MainActivity extends BaseActivity {
         SkinManager.getInstance().register(this);
     }
 
+    /*以下为语音集成*/
+    //APPID
+    private void initSpeech() {
+        // 将“12345678”替换成您申请的 APPID，申请地址： http://www.xfyun.cn
+        // 请勿在 “ =”与 appid 之间添加任务空字符或者转义符
+        SpeechUtility. createUtility( this, SpeechConstant. APPID + "=5a2e498d" );
+    }
+    private void speekText() {
+        //1. 创建 SpeechSynthesizer 对象 , 第二个参数： 本地合成时传 InitListener
+        SpeechSynthesizer mTts = SpeechSynthesizer.createSynthesizer( this, null);
+        //2.合成参数设置，详见《 MSC Reference Manual》 SpeechSynthesizer 类
+        //设置发音人（更多在线发音人，用户可参见 附录 13.2
+        mTts.setParameter(SpeechConstant. VOICE_NAME, "vixyun" ); // 设置发音人
+        mTts.setParameter(SpeechConstant. SPEED, "50" );// 设置语速
+        mTts.setParameter(SpeechConstant. VOLUME, "80" );// 设置音量，范围 0~100
+        mTts.setParameter(SpeechConstant. ENGINE_TYPE, SpeechConstant. TYPE_CLOUD); //设置云端
+        //设置合成音频保存位置（可自定义保存位置），保存在 “./sdcard/iflytek.pcm”
+        //保存在 SD 卡需要在 AndroidManifest.xml 添加写 SD 卡权限
+        //仅支持保存为 pcm 和 wav 格式， 如果不需要保存合成音频，注释该行代码
+        mTts.setParameter(SpeechConstant. TTS_AUDIO_PATH, "./sdcard/iflytek.pcm" );
+        //3.开始合成
+        mTts.startSpeaking( edit_content.getText().toString(), (SynthesizerListener) new MySynthesizerListener()) ;
+    }
+
+    class MySynthesizerListener implements SynthesizerListener {
+
+        @Override
+        public void onSpeakBegin() {
+            showTip(" 开始播放 ");
+        }
+
+        @Override
+        public void onSpeakPaused() {
+            showTip(" 暂停播放 ");
+        }
+
+        @Override
+        public void onSpeakResumed() {
+            showTip(" 继续播放 ");
+        }
+
+        @Override
+        public void onBufferProgress(int percent, int beginPos, int endPos ,
+                                     String info) {
+            // 合成进度
+        }
+
+        @Override
+        public void onSpeakProgress(int percent, int beginPos, int endPos) {
+            // 播放进度
+        }
+
+        @Override
+        public void onCompleted(SpeechError error) {
+            if (error == null) {
+                showTip("播放完成 ");
+            } else if (error != null ) {
+                showTip(error.getPlainDescription( true));
+            }
+        }
+        @Override
+        public void onEvent(int eventType, int arg1 , int arg2, Bundle obj) {
+        }
+    }
+
+    private void startSpeechDialog() {
+        //1. 创建RecognizerDialog对象
+        RecognizerDialog mDialog = new RecognizerDialog(this, new MyInitListener()) ;
+        //2. 设置accent、 language等参数
+        mDialog.setParameter(SpeechConstant. LANGUAGE, "zh_cn" );// 设置中文
+        mDialog.setParameter(SpeechConstant. ACCENT, "mandarin" );
+        // 若要将UI控件用于语义理解，必须添加以下参数设置，设置之后 onResult回调返回将是语义理解
+        // 结果
+        // mDialog.setParameter("asr_sch", "1");
+        // mDialog.setParameter("nlp_version", "2.0");
+        //3.设置回调接口
+        mDialog.setListener( new MyRecognizerDialogListener()) ;
+        //4. 显示dialog，接收语音输入
+        mDialog.show() ;
+    }
+
+    class MyRecognizerDialogListener implements RecognizerDialogListener {
+
+        /**
+         * @param results
+         * @param isLast  是否说完了
+         */
+        @Override
+        public void onResult(RecognizerResult results, boolean isLast) {
+            String result = results.getResultString(); //为解析的
+            showTip(result) ;
+            System. out.println(" 没有解析的 :" + result);
+
+            String text = JsonParser.parseIatResult(result) ;//解析过后的
+            System. out.println(" 解析后的 :" + text);
+
+            String sn = null;
+            // 读取json结果中的 sn字段
+            try {
+                JSONObject resultJson = new JSONObject(results.getResultString()) ;
+                sn = resultJson.optString("sn" );
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            mIatResults .put(sn, text) ;//没有得到一句，添加到
+
+            StringBuffer resultBuffer = new StringBuffer();
+            for (String key : mIatResults.keySet()) {
+                resultBuffer.append(mIatResults .get(key));
+            }
+
+            edit_content.setText(resultBuffer.toString());// 设置输入框的文本
+            edit_content .setSelection(edit_content.length()) ;//把光标定位末尾
+        }
+
+        @Override
+        public void onError(SpeechError speechError) {
+
+        }
+    }
+
+    class MyInitListener implements InitListener {
+
+        @Override
+        public void onInit(int code) {
+            if (code != ErrorCode.SUCCESS) {
+                showTip("初始化失败 ");
+            }
+
+        }
+    }
+
+    /**
+     * 语音识别
+     */
+    private void startSpeech() {
+        //1. 创建SpeechRecognizer对象，第二个参数： 本地识别时传 InitListener
+        SpeechRecognizer mIat = SpeechRecognizer.createRecognizer( this, null); //语音识别器
+        //2. 设置听写参数，详见《 MSC Reference Manual》 SpeechConstant类
+        mIat.setParameter(SpeechConstant. DOMAIN, "iat" );// 短信和日常用语： iat (默认)
+        mIat.setParameter(SpeechConstant. LANGUAGE, "zh_cn" );// 设置中文
+        mIat.setParameter(SpeechConstant. ACCENT, "mandarin" );// 设置普通话
+        //3. 开始听写
+        mIat.startListening( mRecoListener);
+    }
+
+
+    // 听写监听器
+    private RecognizerListener mRecoListener = new RecognizerListener() {
+        // 听写结果回调接口 (返回Json 格式结果，用户可参见附录 13.1)；
+        //一般情况下会通过onResults接口多次返回结果，完整的识别内容是多次结果的累加；
+        //关于解析Json的代码可参见 Demo中JsonParser 类；
+        //isLast等于true 时会话结束。
+        public void onResult(RecognizerResult results, boolean isLast) {
+            Log.e (TAG, results.getResultString());
+            System.out.println(results.getResultString()) ;
+            showTip(results.getResultString()) ;
+        }
+
+        // 会话发生错误回调接口
+        public void onError(SpeechError error) {
+            showTip(error.getPlainDescription(true)) ;
+            // 获取错误码描述
+            Log. e(TAG, "error.getPlainDescription(true)==" + error.getPlainDescription(true ));
+        }
+
+        // 开始录音
+        public void onBeginOfSpeech() {
+            showTip(" 开始录音 ");
+        }
+
+        //volume 音量值0~30， data音频数据
+        public void onVolumeChanged(int volume, byte[] data) {
+            showTip(" 声音改变了 ");
+        }
+
+        // 结束录音
+        public void onEndOfSpeech() {
+            showTip(" 结束录音 ");
+        }
+
+        // 扩展用接口
+        public void onEvent(int eventType, int arg1 , int arg2, Bundle obj) {
+        }
+    };
+
+    private void showTip (String data) {
+        /*Toast.makeText( this, data, Toast.LENGTH_SHORT).show() ;*/
+    }
+
+    //皮肤
     @Override
     protected void onDestroy() {
         super.onDestroy();
         SkinManager.getInstance().unregister(this);
     }
+
+
 }
