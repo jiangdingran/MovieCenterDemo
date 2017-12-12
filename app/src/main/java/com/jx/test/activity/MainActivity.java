@@ -283,7 +283,9 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, SaveActivity.class));
                 break;
             case R.id.load:
-                Toast.makeText(mContext, "敬请期待", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, JiaoziVedioActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.fl:
                 startActivity(new Intent(MainActivity.this, WelfareActivity.class));
